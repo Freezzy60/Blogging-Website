@@ -8,42 +8,52 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="./css/login.css">
+        <link rel="stylesheet" href="./css/login.css">
         <link rel="stylesheet" href="./css/home.css">
     </head>
     <body>
+        <div class="nav">
+            <nav class="navbar">
+                <img src="img/logo.png" class="logo" alt="logo">
+                <ul class="links-container">
+                    <li class="link-item"><a href="./home.html" class="link">home</a></li>
+                    <li class="link-item"><a href="./editor.html" class="link">editor</a></li>
+                    <li class="link-item"><a href="./login.html" class="link">login</a></li>
+                </ul>
+            </nav>
+        </div>
 
+        <div class="container-login">
+            <div class="login"> 
 
-        <nav class="navbar">
-            <img src="img/logo.png" class="logo" alt="logo">
-            <ul class="links-container">
-                <li class="link-item"><a href="/" class="link">home</a></li>
-                <li class="link-item"><a href="./editor.html" class="link">editor</a></li>
-                <li class="link-item"><a href="./login.html" class="link">login</a></li>
-            </ul>
-        </nav>
+                 <div class="h4-email">
+                     <h4>E-Mail</h4>
+                </div> 
 
+            <div class="email">
+                <input type="email" id="email">
+            </div>
 
+            <div class="h4-password">
+                <h4>Password</h4>
+            </div>
 
-        <div id="content_container" class="content-container">
-            <div id="form_container">
-                <div id="form_header_container">
-                    <h2 id="form_header"> Login + Firebase Database </h2>
-                </div>
+            <div class="password">
+                <input type="password" id="password">
+            </div>
 
-                <div id="form_content_container">
-                    <div id="form_content_inner_container">
-                        <input type="email" id="email" placeholder="Email">
-                        <input type="password" id="password" placeholder="New Password">
+            <div class="button-login">
+                <button onclick="login()">Login</button>
+            </div>
 
+            <div class="button-signUp">
+                <button onclick="register()">Sign Up</button>
+            </div>
+                    
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>     
 
-                        <div id="button_container">
-                            <button onclick="login()">Login</button>
-                            <button onclick="register()">Register</button>
-                        </div>
-
-                    </div>
-                </div>
             </div>
         </div>
     </body>

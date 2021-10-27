@@ -1,3 +1,88 @@
-.content-container{
-    margin: 150px;
+body{
+    background-color: #ed8843;
+    background-position-y: -530px;
+}
+
+.container-login{
+    margin-top: 250px;
+    display: flex;
+    justify-content: center;
+}
+
+.login{        
+    width: 250px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.login .h4-email{
+    text-align: center;
+}
+
+.login input{
+    background-color: white;
+    margin: 2px 0px 2px 0px;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    text-decoration: none;
+    width: 200px;
+}
+
+.login input:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.login .h4-password{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.login button{ 
+    width: 150px;
+    color: black;
+    background-color:white;
+    border-radius: 10px;
+    justify-content: center;
+    margin: 2px 0px 2px 0px;    
+}
+.button-login{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.button-signUp{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.password{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.email{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.login .forgot-password{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login .signUp{    
+    text-align: center;
+    margin-top: 20px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
 }
