@@ -18,13 +18,18 @@
                 <ul class="links-container">
                     <li class="link-item"><a href="./home.html" class="link">home</a></li>
                     <li class="link-item"><a href="./editor.html" class="link">editor</a></li>
-                    <li class="link-item"><a href="./login.html" class="link">login</a></li>
                 </ul>
+                <button onclick="openPopUp('login')">Login</button>
             </nav>
         </div>
 
-        <div class="container-login">
+        <div class="container-login" id="login">
+            
             <div class="login"> 
+
+                <div class="button-close">
+                    <button id="hidePopUp" onclick="closePopUp('login')">X</button>
+                </div>
 
                  <div class="h4-email">
                      <h4>E-Mail</h4>
@@ -42,7 +47,7 @@
                 <input type="password" id="password">
             </div>
 
-            <div class="button-login">
+            <div class="button-login" id="btn-login">
                 <button onclick="login()">Login</button>
             </div>
 

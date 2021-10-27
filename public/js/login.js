@@ -16,6 +16,7 @@ const firebaseConfig = {
   const auth = firebase.auth()
   const database = firebase.database()
   
+  
   // Set up our register function
   function register () {
     // Get all our input fields
@@ -121,4 +122,15 @@ const firebaseConfig = {
     } else {
       return true
     }
+  }
+
+
+  function openPopUp(dialogId){
+    document.getElementById(dialogId).classList.add("active");
+    document.getElementById("body-overlay").classList.add("active");
+  }
+
+  function closePopUp(dialogId){
+    document.getElementById(dialogId).classList.remove("active");
+    document.getElementById("body-overlay").classList.remove("active");
   }

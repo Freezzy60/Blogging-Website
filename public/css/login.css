@@ -4,15 +4,23 @@ body{
 }
 
 .container-login{
+    opacity: 0;
+    pointer-events: none;
     margin-top: 250px;
     display: flex;
     justify-content: center;
 }
 
+.active{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
 .login{        
     width: 250px;
     background-color: white;
-    padding: 20px;
+    padding: 20px; 
     border-radius: 10px;
 }
 
@@ -85,4 +93,19 @@ body{
 a{
     text-decoration: none;
     color: black;
+}
+
+.button-close{
+    display: flex;
+    justify-content: end;
+}
+    
+#hidePopUp{    
+    cursor: pointer;
+    width: 15px;
+    border:none;
+}
+
+button{
+    cursor: pointer;
 }
