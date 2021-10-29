@@ -3,45 +3,40 @@ const articleFeild = document.querySelector('.article');
 
 //banner
 const bannerImage = document.querySelector('#banner-upload');
-const banner = document.querySelector("#banner");
+const banner = document.querySelector(".banner");
 let bannerPath;
 
 const publishBtn = document.querySelector('.publish-btn');
 const uploadInput = document.querySelector('#image-upload');
 
-var uploaded_image;
 
 
-bannerImage.addEventListener("change", function(){
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-        uploaded_image = reader.result;
-        banner.style.backgroundImage = `url(${uploaded_image})`
-    });
-    reader.readAsDataURL(this.files[0]);
+uploadInput.addEventListener('change', () => {
+    uploadImage(uploadInput, "image");
 })
-/** bannerImage.addEventListener('change', () => {
- * uploadImage(bannerImage, "banner");
- * }) */
 
-
-/***const uploadImage = (uploadFile, uploadType) => {
-    const [file] = uploadFile.files;
+const uploadImage = (uploadFile, uploadType) => {
+    const[file] = uploadFile.files;
     if(file && file.type.includes("image")){
-        const formdata = new FormData();
+        const formdata = new Formdata();
         formdata.append('image', file);
 
-        fetch('/uploads', {
+        fetch('/upload', {
             method: 'post',
-            body:  formdata
+            body: formdata
         }).then(res => res.json())
         .then(data => {
-            bannerPath = `${location.origin}/${data}`;
-            banner.style.backgroundImage = `url("${bannerPath}")`;
+            if(uploadType == "image"){
+                addImage(data, file.name);
+            } else{
+                bannerPath = `${location.origin}/${data}`;
+                banner.style.backgroundImage = `url("${bannerPath}")`;
+            }
         })
+    }else{
+        alert("upload Image only")
     }
-}**/
-
+}
 
 // This function will let you insrert a text format of your image of example if I upload 1.png then 
 // this function insert something like thie ![1.png](image path) inside our article field.
@@ -82,3 +77,4 @@ publishBtn.addEventListener('click', () => {
         })
     }
 })
+

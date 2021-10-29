@@ -1,19 +1,22 @@
-body{
-    background-color: #ed8843;
-    background-position-y: -530px;
+
+.navbar button{
+    border: none;
+    background-color: white;
 }
 
-.container-login{
+.container-login{    
+    position: fixed;
+    right: 4%;
+    top: 9%;
     opacity: 0;
     pointer-events: none;
-    margin-top: 250px;
     display: flex;
     justify-content: center;
 }
 
 .active{
     opacity: 1;
-    pointer-events: auto;
+    pointer-events: auto;    
 }
 
 
@@ -21,7 +24,6 @@ body{
     width: 250px;
     background-color: white;
     padding: 20px; 
-    border-radius: 10px;
 }
 
 .login .h4-email{

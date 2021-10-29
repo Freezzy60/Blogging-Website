@@ -34,7 +34,7 @@ body{
     list-style: none;
 }
 
-.link{
+.links-container a{
     padding: 10px;
     margin-left: 10px;
     text-decoration: none;
