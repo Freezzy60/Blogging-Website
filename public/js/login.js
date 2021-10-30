@@ -28,9 +28,6 @@ function login(editorId, dialogId) {
           // Push to Firebase Database
           database_ref.child("users/" + user.uid).update(user_data);
 
-          // DOne
-          alert("User Logged In!!");
-
           document.getElementById(editorId).classList.add("editor-active");
           document.getElementById(dialogId).classList.remove("active");
 
