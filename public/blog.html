@@ -17,9 +17,10 @@
     <nav class="navbar">
         <img src="img/logo.png" class="logo" alt="logo">
         <ul class="links-container">
-            <li class="link-item"><a class="link-editor" id="editor-nav" href="./editor.html">editor</a></li>
-            <li class="link-item"><a class="link" onclick="openPopUp('login')">login</a></li>
-            <li class="link-item"><a href="./index.html" class="link">home</a></li>
+            <li class="link-item"><a class="link-editor" id="active-login-editor" href="./editor.html">editor</a></li>
+            <li class="link-item"><a class="link-editor" id="active-login-logout" onclick="signOut('logout')" href="./blog.html">logout</a></li>
+            <li class="link-item"><a class="link-login"  id="inactive-login" onclick="openPopUp('login')">login</a></li>
+            <li class="link-item"><a class="link" href="./index.html">home</a></li>
         </ul>
     </nav>
 
@@ -46,11 +47,11 @@
           </div>
   
           <div class="button-login" id="btn-login">
-            <button onclick="login('editor-nav', 'login')" id="login">Login</button>
+            <button onclick="signIn('editor-nav', 'login')" id="login">Login</button>
           </div>
   
           <div class="button-signUp">
-            <button onclick="register()">Sign Up</button>
+            <button onclick="signUp()">Sign Up</button>
           </div>
   
           <div class="forgot-password">
