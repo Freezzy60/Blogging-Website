@@ -17,7 +17,8 @@ function signUp(){
     var email = document.getElementById("email");
     var password = document.getElementById("password");
     
-    const promise = auth.createUserWithEmailAndPassword(email.value, password.value)
+    const promise = auth
+    .createUserWithEmailAndPassword(email.value, password.value)
     .then(function(){
 
         var user = auth.currentUser;
@@ -28,11 +29,8 @@ function signUp(){
             last_login: Date.now(),
         };
 
-        // Push to Firebase Database
-
-        alert(user.uid);
+        // Push user to Firebase Database
         database_ref.child("admin/" + user.uid).set(user_data);
-
 
     })
 
@@ -45,7 +43,19 @@ function signIn () {
     var email = document.getElementById("email");
     var password = document.getElementById("password");
 
-    const promise = auth.signInWithEmailAndPassword(email.value, password.value);
+    const promise = auth
+    .signInWithEmailAndPassword(email.value, password.value)
+    .then(function(){
+
+        var user = auth.currentUser;
+
+        var user_data = {
+            last_login: Date.now()
+        };
+
+        database_ref.child("admin/" + user.uid).update(user_data);
+
+    })
 
     document.getElementById("login").classList.remove("active")
 
