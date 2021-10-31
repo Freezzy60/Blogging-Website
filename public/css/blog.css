@@ -159,10 +159,11 @@ button{
     opacity: 0;
     pointer-events: none;
 }
-.active{
+.active-nav{
     opacity: 1;
-    pointer-events: auto;    
+    pointer-events: auto;  
+      
 }
 
-.inactive{display: none;
+.inactive-nav{display: none;
 }

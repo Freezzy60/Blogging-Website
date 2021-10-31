@@ -5,18 +5,17 @@
 }
 
 .container-login{    
-    position: fixed;
-    right: 4%;
-    top: 9%;
     opacity: 0;
     pointer-events: none;
-    display: flex;
-    justify-content: center;
 }
 
 .active{
+    position: fixed;
     opacity: 1;
-    pointer-events: auto;    
+    pointer-events: auto;  
+    right: 5%;  
+    top: 60px;
+    height: 280px;
 }
 
 

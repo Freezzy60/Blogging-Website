@@ -1,9 +1,40 @@
+//User signed in ?
+auth.onAuthStateChanged(function(user,editorId,loginId){
+    if(user){
+        document.getElementById("active-login-editor").classList.add("active-nav");
+        document.getElementById("active-login-logout").classList.add("active-nav");
+        document.getElementById("inactive-login").classList.add("inactive-nav");
+
+    }else{
+        document.getElementById("active-login-editor").classList.remove("active-nav");
+    }
+});
+
+
 //Sign Up User
 function signUp(){
+
     var email = document.getElementById("email");
     var password = document.getElementById("password");
+    
+    const promise = auth.createUserWithEmailAndPassword(email.value, password.value)
+    .then(function(){
 
-    const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
+        var user = auth.currentUser;
+
+        // Create User data
+        var user_data = {
+            email: email.value,
+            last_login: Date.now(),
+        };
+
+        // Push to Firebase Database
+
+        alert(user.uid);
+        database_ref.child("admin/" + user.uid).set(user_data);
+
+
+    })
 
     promise.catch(e => alert(e.message));
 }
@@ -26,18 +57,7 @@ function signOut() {
     auth.signOut();
 }
 
-//User signed in ?
-auth.onAuthStateChanged(function(user,editorId,loginId){
-    if(user){
-        var email = user.email;
-        document.getElementById("active-login-editor").classList.add("active");
-        document.getElementById("active-login-logout").classList.add("active");
-        document.getElementById("inactive-login").classList.add("inactive");
 
-    }else{
-        document.getElementById("editor-nav").classList.remove("active");
-    }
-});
 
 
 //Show PopUp -> add .active to classlist
