@@ -1,5 +1,7 @@
-const blogTitleField = document.querySelector('.title');
-const articleFeild = document.querySelector('.article');
+import  { getDatabase, ref, set, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+
+
+
 
 //banner
 const bannerImage = document.querySelector('#banner-upload');
@@ -19,7 +21,8 @@ bannerImage.addEventListener("change", function(){
         document.querySelector(".banner").style.backgroundImage = `url(${upload_image})`;
     });
     reader.readAsDataURL(this.files[0]);
-} )
+
+})
 
 
 /**uploadInput.addEventListener('change', () => {
@@ -57,35 +60,30 @@ const addImage = (imagepath, alt) => {
     articleFeild.value = articleFeild.value.slice(0, curPos) + textToInsert + articleFeild.value.slice(curPos);
 }
 
-let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
 
-publishBtn.addEventListener('click', () => {
-    if(articleFeild.value.length && blogTitleField.value.length){
-        // generating id
-        let letters = 'abcdefghijklmnopqrstuvwxyz';
-        let blogTitle = blogTitleField.value.split(" ").join("-");
-        let id = "";
-        for(let i = 0; i < 4; i++){
-            id += letters[Math.floor(Math.random() * letters.length)];
-        }
 
-        // setting up docName
-        let docName = `${blogTitle}-${id}`;
-        let date = new Date(); // for published at info
+//import  {ref, set, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
-        //access firstore with db variable;
-        db.collection("Freiraum").doc(docName).set({
-            title: blogTitleField.value,
-            article: articleFeild.value,
-            bannerImage: bannerPath,
-            publishedAt: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
+
+
+var blogTitle = document.querySelector('.title');
+var article = document.querySelector('.article');
+
+
+   
+    function insertData(){
+        set(ref(database, "blog/"),{
+            title: blogTitle.value,
+            text: article.value
         })
-        .then(() =>{
-            location.href = `/${docName}`;
+        .then(() => {
+            alert("Blog Uploaded");
         })
-        .catch((err) => {
-            console.error(err);
-        })
+        .catch((error) => {
+            alert("Upload failed" + error);
+        });
     }
-})
+
+publishBtn.addEventListener('click', insertData);
+
 
