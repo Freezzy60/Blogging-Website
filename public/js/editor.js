@@ -10,12 +10,23 @@ const publishBtn = document.querySelector('.publish-btn');
 const uploadInput = document.querySelector('#image-upload');
 
 
+var upload_image = "";
 
-uploadInput.addEventListener('change', () => {
+bannerImage.addEventListener("change", function(){
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+        upload_image = reader.result;
+        document.querySelector(".banner").style.backgroundImage = `url(${upload_image})`;
+    });
+    reader.readAsDataURL(this.files[0]);
+} )
+
+
+/**uploadInput.addEventListener('change', () => {
     uploadImage(uploadInput, "image");
-})
+})**/
 
-const uploadImage = (uploadFile, uploadType) => {
+/**const uploadImage = (uploadFile, uploadType) => {
     const[file] = uploadFile.files;
     if(file && file.type.includes("image")){
         const formdata = new Formdata();
@@ -36,7 +47,7 @@ const uploadImage = (uploadFile, uploadType) => {
     }else{
         alert("upload Image only")
     }
-}
+}**/
 
 // This function will let you insrert a text format of your image of example if I upload 1.png then 
 // this function insert something like thie ![1.png](image path) inside our article field.
