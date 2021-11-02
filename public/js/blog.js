@@ -1,11 +1,12 @@
+
 let blogId = decodeURI(location.panthname.split("/").pop());
 
 let docRef = db.collection("blogs").doc(blogId);
 
 docRef.get().then((doc) => {
-    if(doc.exists){
+    if (doc.exists) {
         setupBlog(doc.data());
-    } else{
+    } else {
         location.replace("/");
     }
 })
@@ -27,13 +28,13 @@ const setupBlog = (data) => {
 
 const addArticle = (ele, data) => {
     data = data.split("\n").filter(item => item.length);
-    
+
     data.forEach(item => {
         //check for heading
-        if(item[0] == '#'){
+        if (item[0] == '#') {
             let hCount = 0;
             let i = 0;
-            while(item[i] == '#'){
+            while (item[i] == '#') {
                 hCount++;
                 i++;
             }
@@ -41,12 +42,12 @@ const addArticle = (ele, data) => {
             ele.innerHTML += `<${tag}>${item.slice(hCount, item.length)}</${tag}>`
         }
         // cheking for image format
-        else if(item[0] == "!" && item[1] == "["){
+        else if (item[0] == "!" && item[1] == "[") {
 
             let seperator;
-    
-            for(let i = 0; i <= item.length; i++){
-                if(item[i] == "]" && item[i + 1] == "(" && item[item.length - 1] == ")"){
+
+            for (let i = 0; i <= item.length; i++) {
+                if (item[i] == "]" && item[i + 1] == "(" && item[item.length - 1] == ")") {
                     seperator = i;
                 }
             }
@@ -56,9 +57,13 @@ const addArticle = (ele, data) => {
             <img src="${src}" alt="${alt}" class="article-image">
             `;
         }
-        else{
+        else {
             ele.innerHTML += `<p>${item}</p>`
         }
 
     });
 }
+
+  
+
+

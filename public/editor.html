@@ -13,15 +13,14 @@
     <nav class="navbar">
         <img src="img/logo.png" class="logo" alt="logo">
         <ul class="links-container">
-            <li class="link-item"><a href="./home.html" class="link">home</a></li>
-            <li class="link-item"><a href="./editor.html" class="link">editor</a></li>
-            <li class="link-item"><a href="./login.html" class="link">login</a></li>
+            <li class="link-item"><a href="./index.html" class="link">home</a></li>
+            <li class="link-item"><a href="./blog.html" class="link">blog</a></li>
         </ul>
     </nav>
 
-    <div id="banner">
-        <input type="file" accept="image/*" id="banner-upload" hidden>
-        <label for="banner-upload" class="banner-upload-btn"><img src="./img/upload.png" alt="upload banner"></label>
+    <div class="banner">
+        <input type="file" accept="image/*" id="bannder-upload"/>
+        <label for="banner-upload" class="banner-upload-btn"><img src="" alt="upload banner"></label>
     </div>
 
     <div class="blog">
@@ -38,9 +37,10 @@
     
     
    
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firstore.js"></script>
+    
+    <script src="./js/firebase.js"></script>
+    <script src="./js/editor.js"></script>
 </body>
-
-
-
-<script src="./js/editor.js"></script>
 </html>
