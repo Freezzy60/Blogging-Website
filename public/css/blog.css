@@ -165,5 +165,6 @@ button{
       
 }
 
-.inactive-nav{display: none;
+.inactive-nav{
+    display: none;
 }
