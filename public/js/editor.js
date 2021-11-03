@@ -1,5 +1,36 @@
-import  { getDatabase, ref, set, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+import { getDatabase, ref, set, child, update, remove}
+from  "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
+const db = getDatabase();
+
+
+//----References-----------------//
+
+var blogtitle = document.querySelector(".title");
+var article = document.querySelector(".article");
+
+var instBtn = document.getElementById("publishBtn");
+
+//---Insert Data---//
+
+function insertData(){
+
+    var i = 0;
+    var blogId = i++;
+
+    set(ref(db, "Blog/" + blogId),{
+        Title: blogtitle.value,
+        Text: article.value
+    })
+    .then(() => {
+        alert("data stored successfully");
+    })
+    .catch((error) => {
+        alert("upload failed" + error);
+    });
+}
+
+instBtn.addEventListener('click', insertData);
 
 
 
@@ -59,31 +90,3 @@ const addImage = (imagepath, alt) => {
     let textToInsert = `\r![${alt}](${imagepath})\r`;
     articleFeild.value = articleFeild.value.slice(0, curPos) + textToInsert + articleFeild.value.slice(curPos);
 }
-
-
-
-//import  {ref, set, child, update, remove} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
-
-
-
-var blogTitle = document.querySelector('.title');
-var article = document.querySelector('.article');
-
-
-   
-    function insertData(){
-        set(ref(database, "blog/"),{
-            title: blogTitle.value,
-            text: article.value
-        })
-        .then(() => {
-            alert("Blog Uploaded");
-        })
-        .catch((error) => {
-            alert("Upload failed" + error);
-        });
-    }
-
-publishBtn.addEventListener('click', insertData);
-
-
