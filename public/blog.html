@@ -1,101 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />   
     <title>Blog</title>
+    <link rel="stylesheet" href="./css/home.css" />
+    <link rel="stylesheet" href="./css/editor.css" />
+    <link rel="stylesheet" href="./css/blog.css" />
+    <link rel="stylesheet" href="./css/login.css" />
+  </head>
 
-    <link rel="stylesheet" href="./css/home.css">
-    <link rel="stylesheet" href="./css/editor.css">
-    <link rel="stylesheet" href="./css/blog.css">
-    <link rel="stylesheet" href="./css/login.css">
-</head>
-<body>
-
+  <body>
     <nav class="navbar">
-        <img src="img/logo.png" class="logo" alt="logo">
-        <ul class="links-container">
-            <li class="link-item"><a class="link-editor" id="active-login-editor" href="./editor.html">editor</a></li>
-            <li class="link-item"><a class="link-editor" id="active-login-logout" onclick="signOut('logout')" href="./blog.html">logout</a></li>
-            <li class="link-item"><a class="link-login"  id="inactive-login" onclick="openPopUp('login')">login</a></li>
-            <li class="link-item"><a class="link" href="./index.html">home</a></li>
-        </ul>
+      <img src="img/logo.png" class="logo" alt="logo" />
+      <ul class="links-container">
+        <li class="link-item">
+          <a class="link-editor" id="editorBtn" href="./editor.html">editor</a>
+        </li>
+        <li class="link-item">
+          <a class="link-editor" id="logoutBtn" href="./blog.html">logout</a>
+        </li>
+        <li class="link-item"><a class="link" id="openLogin">login</a></li>
+        <li class="link-item"><a class="link" href="./index.html">home</a></li>
+      </ul>
     </nav>
 
     <div class="container-login" id="login">
-        <div class="login">
-          <div class="button-close">
-            <button id="hidePopUp" onclick="closePopUp('login')">X</button>
-          </div>
-  
-          <div class="h4-email">
-            <h4>E-Mail</h4>
-          </div>
-  
-          <div class="email">
-            <input type="email" id="email" />
-          </div>
-  
-          <div class="h4-password">
-            <h4>Password</h4>
-          </div>
-  
-          <div class="password">
-            <input type="password" id="password" />
-          </div>
-  
-          <div class="button-login" id="btn-login">
-            <button onclick="signIn('editor-nav', 'login')" id="login">Login</button>
-          </div>
-  
-          <div class="button-signUp">
-            <button onclick="signUp()">Sign Up</button>
-          </div>
-  
-          <div class="forgot-password">
-            <a href="#">Forgot Password?</a>
-          </div>
+      <div class="login">
+        <div id="closeLogin" class="button-close">
+          <button id="hidePopUp">X</button>
+        </div>
+
+        <div class="h4-email">
+          <h4>E-Mail</h4>
+        </div>
+
+        <div class="email">
+          <input type="email" id="email" />
+        </div>
+
+        <div class="h4-password">
+          <h4>Password</h4>
+        </div>
+
+        <div class="password">
+          <input type="password" id="password" />
+        </div>
+
+        <div class="button-login" id="btn-login">
+          <button id="loginBtn">Login</button>
+        </div>
+
+        <div class="button-signUp">
+          <button id="signUpBtn">Sign Up</button>
+        </div>
+
+        <div class="forgot-password">
+          <a href="#">Forgot Password?</a>
         </div>
       </div>
-
+    </div>
 
     <div class="banner">
-        <div class="blog">
-            <h1 class="title"></h1>
-            <p class="published"><span>published at -</span></p>
-            <div class="article">
-
-            </div>
-        </div>
+      <div class="blog">
+        <h1 class="title"></h1>
+        <p class="published"><span>published at -</span></p>
+        <div class="article"></div>
+      </div>
     </div>
 
     <h1 class="sub-heading">Read more</h1>
 
     <section class="blogs-section">
-        <div class="blog-card">
-            <img src="img/header.jpg" alt="header" class="blog-image">
-            <h1 class="blog-title">Neue Food möglichkeiten.</h1>
-            <p class="blog-overview">sehe neue Food trends</p>
-            <a href="/" class="btn dark">read</a>
-        </div>
+      <div class="blog-card">
+        <img src="img/header.jpg" alt="header" class="blog-image" />
+        <h1 class="blog-title">Neue Food möglichkeiten.</h1>
+        <p class="blog-overview">sehe neue Food trends</p>
+        <a href="/" class="btn dark">read</a>
+      </div>
     </section>
-    
 
-
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-  <!-- TODO: Add SDKs for Firebase products that you want to use
-         https://firebase.google.com/docs/web/setup#available-libraries -->
-  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
-    
-    <script src="./js/firebase.js"></script>
+    <script type="module" src="./js/firebase.js"></script>
+    <script type="module" src="./js/login.js"></script>
     <script src="./js/home.js"></script>
     <script src="./js/blog.js"></script>
-    <script src="./js/login.js"></script>
-</body>
+  </body>
 </html>

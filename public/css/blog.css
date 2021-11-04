@@ -153,6 +153,9 @@ a{
 
 button{
     cursor: pointer;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
 }
 
 .link-editor{

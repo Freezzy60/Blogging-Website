@@ -13,11 +13,12 @@ var instBtn = document.getElementById("publishBtn");
 
 //---Insert Data---//
 
+var blogId = 0;
+
 function insertData(){
-
-    var i = 0;
-    var blogId = i++;
-
+        
+    blogId++;    
+    
     set(ref(db, "Blog/" + blogId),{
         Title: blogtitle.value,
         Text: article.value
@@ -29,6 +30,7 @@ function insertData(){
         alert("upload failed" + error);
     });
 }
+
 
 instBtn.addEventListener('click', insertData);
 
