@@ -30,9 +30,6 @@ closeLogin.addEventListener('click', closePopUp);
 
 function login() {
 
-    //Current User
-    var currentUser = db.currentUser;
-
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
@@ -45,7 +42,8 @@ function login() {
 
     signInWithEmailAndPassword(auth, email, password)
         .then(function () {
-            update(ref(db, "admin/" + "test"),
+            
+            update(ref(db, "admin/" + auth.currentUser.uid),            
                 {
                     email: email,
                     last_login: Date.now(),
