@@ -1,12 +1,11 @@
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
 import { getDatabase, ref, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
 //Auth
 const auth = getAuth();
 //Database
 const db = getDatabase();
-//set persistence to session
-auth.setPersistence().Session();
+
 
 //References
 let openLoginBtn = document.getElementById("openLogin");
@@ -61,11 +60,16 @@ function signIn() {
     if (validate_email(email) == false || validate_password(password) == false) {
         alert("Email or Password is Outta Line!!");
         return;
-    }
+    };
 
+    //sign in with eamil and password
     signInWithEmailAndPassword(auth, email, password)
         .then(function () {
 
+            //Logout if tab close or browser close
+            auth.setPersistence(browserSessionPersistence);
+
+            //update user infos in db
             update(ref(db, "admin/" + auth.currentUser.uid),
                 {
                     email: email,
