@@ -18,6 +18,16 @@
     height: 280px;
 }
 
+.activeEditorBtn{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.activeLogoutBtn{
+    opacity: 1;
+    pointer-events: auto;
+}
+
 
 .login{        
     width: 250px;
@@ -109,4 +119,9 @@ a{
 
 button{
     cursor: pointer;
+}
+
+.in-active{
+    display: none;
+    pointer-events: auto;
 }
