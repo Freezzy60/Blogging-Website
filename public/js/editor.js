@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, onValue, child, push, update, remove}
+import { getDatabase, ref, set, onValue, key, child, push, update, remove}
 from  "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 //import { getStorage } from 'firebase/storage/';
 
@@ -22,9 +22,9 @@ var instBtn = document.getElementById("publishBtn");
 //---Insert Data---//
 
 function insertData(){
-
+    
     /*var uploadTask = storageRef.put(bannerImage);
-
+    
     uploadTask.on('state_changed', function(snapshot){
         //get task progress by following code
         var progress = (snapshot.bytesTransferred/snapshot.totalBytes)+100;
@@ -32,14 +32,15 @@ function insertData(){
     },function(error){
         console.log(error.message);
     })
-
-    uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL){
-
     
+    uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL){
+        
+        
     })*/
-    set(ref(db, "Blog/"),{
+    push(ref(db, "Blog/"),{
         Title: blogtitle.value,
         Text: article.value,
+        
     })
     .then(() => {
         alert("data stored successfully");
@@ -47,9 +48,10 @@ function insertData(){
     .catch((error) => {
         alert("upload failed" + error);
     });
-
+    
 
 }
+
 
 instBtn.addEventListener('click', insertData);
 
