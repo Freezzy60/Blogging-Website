@@ -1,26 +1,45 @@
-import { getDatabase, ref, set, child, update, remove}
+import { getDatabase, ref, set, onValue, child, push, update, remove}
 from  "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+//import { getStorage } from 'firebase/storage/';
 
 const db = getDatabase();
+//const storageDb = getStorage();
+//const storageRef = ref(storageDb, 'images/' + imageName);
+//-- Storage Image in Storage database
+
+
 
 
 //----References-----------------//
 
 var blogtitle = document.querySelector(".title");
 var article = document.querySelector(".article");
+//var imageName = bannerImage.name;
 
 var instBtn = document.getElementById("publishBtn");
+
 
 //---Insert Data---//
 
 function insertData(){
 
-    var i = 0;
-    var blogId = i++;
+    /*var uploadTask = storageRef.put(bannerImage);
 
-    set(ref(db, "Blog/" + blogId),{
+    uploadTask.on('state_changed', function(snapshot){
+        //get task progress by following code
+        var progress = (snapshot.bytesTransferred/snapshot.totalBytes)+100;
+        console.log("upload is"+ progress + "done");
+    },function(error){
+        console.log(error.message);
+    })
+
+    uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL){
+
+    
+    })*/
+    set(ref(db, "Blog/"),{
         Title: blogtitle.value,
-        Text: article.value
+        Text: article.value,
     })
     .then(() => {
         alert("data stored successfully");
@@ -28,6 +47,8 @@ function insertData(){
     .catch((error) => {
         alert("upload failed" + error);
     });
+
+
 }
 
 instBtn.addEventListener('click', insertData);
@@ -35,7 +56,6 @@ instBtn.addEventListener('click', insertData);
 
 
 //banner
-const bannerImage = document.querySelector('#banner-upload');
 const banner = document.querySelector(".banner");
 let bannerPath;
 
@@ -45,7 +65,7 @@ const uploadInput = document.querySelector('#image-upload');
 
 var upload_image = "";
 
-bannerImage.addEventListener("change", function(){
+/**bannerImage.addEventListener("change", function(){
     const reader = new FileReader();
     reader.addEventListener("load", () => {
         upload_image = reader.result;
@@ -53,7 +73,7 @@ bannerImage.addEventListener("change", function(){
     });
     reader.readAsDataURL(this.files[0]);
 
-})
+})**/
 
 
 /**uploadInput.addEventListener('change', () => {

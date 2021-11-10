@@ -51,7 +51,7 @@ body{
     margin-top: 60px;
     width: 100%;
     height: calc(100vh - 60px);
-    background: url(../img/header.jpg);
+    background: url(../img/banner.jpg);
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -78,7 +78,7 @@ body{
 .heading .no-fill{
     font-style: italic;
     color: transparent;
-    -webkit-text-stroke: 2px #fff;
+    -webkit-text-stroke: 2px rgb(14, 11, 11);
 }
 
 .btn{
@@ -90,7 +90,7 @@ body{
     text-transform: capitalize;
 }
 
-.blogs-section{
+#blog-section{
     width: 100%;
     padding: 50px 5vw;
     display: grid;
@@ -106,7 +106,7 @@ body{
     margin-bottom: 10px;
 }
 
-.blog-overview{
+#blog-overview{
     margin: 10px 0 20px;
     line-height: 30px;
 }

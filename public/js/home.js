@@ -1,23 +1,34 @@
+import { getDatabase, ref, onValue}
+from  "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+
+const db = getDatabase();
+        //-- Get Database --//
+        const blogSection = document.getElementById("blog-section");
+        
 
 
-const blogSection = document.querySelector('.blogs-section');
 
-db.collection("blogs").get().then((blogs) => {
-    blogs.forEach(blog => {
-        if(blog.id != decodeURI(location.pathname.split("/").pop())){
-            createBlog(blog);
-        }
-    });
-})
+        const blogEntryRefTitle = ref(db, 'Blog/Title');
+        const blogEntryRefText = ref(db, 'Blog/Text');
+        onValue(blogEntryRefTitle, (snapshot) => {
+            const dataTitle = snapshot.val();
+            console.log(dataTitle);
 
-const createBlog = (blog) => {
-    let data = blog.data();
-    blogSection.innerHTML += `
-    <div class="blog-card">
-       <img src="${data.bannerImage}" class="blog-image" alt="">
-       <h1 class="blog-title">${data.title.substring(0, 100) + '...'}</h1>
-       <p class="blog-overview">${data.article.substring(0, 200) + '...'}</p>
-       <a href="/${blog.id}" class="btn dark">read</a>
-    </div>
-    `;
-}
+            onValue(blogEntryRefText, (snapshot) =>{
+              const dataText = snapshot.val();
+              console.log(dataText);
+              
+              blogSection.innerHTML +=`
+              <div class="blog-card">
+               <img src="img/banner.jpg" alt="header" class="blog-image">
+               <h1 id="blog-title">${dataTitle}</h1>
+               <p id="blog-overview">${dataText}</p>
+               <a href="/" class="btn dark">read</a>
+              </div>
+              `;
+
+        })
+        
+                    
+            
+        });
