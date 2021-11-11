@@ -6,34 +6,35 @@ const db = getDatabase();
 const blogSection = document.getElementById("blog-section");
 
 
-//const blogEntryRefTitle = ref(db, 'Blog/' + "-MoDzNOTHxURhx-zwlHw" + '/Title');
-//const blogEntryRefText = ref(db, 'Blog/Text');
-
+//Title of Blog
+var dataTitle = "";
+//Text of Title
+var dataText = "";
 
 //Get all blogs from db
 var query = ref(db, "Blog");
 
-var dataTitle = "";
-var dataText = "";
-
 //Print all Blogs on website
   onValue(query, (snapshot) => {
     snapshot.forEach(function (childSnapshot){
+      //Get blog key
       const blogKey = childSnapshot.key;
 
+      //Get Ref to Title at db
       const blogEntryRefTitle = ref(db, 'Blog/' + blogKey + '/Title');
       
+      //Get Title from db
       onValue(blogEntryRefTitle, (snapshot) => {
         dataTitle = snapshot.val().toString();
-        console.log(dataTitle);
       }); 
       
+      //Get Ref to Text at db
       const blogEntryRefText = ref(db, 'Blog/' + blogKey + '/Text');
 
+      //Get Text from db
       onValue(blogEntryRefText, (snapshot) => {
         dataText = snapshot.val().toString();
-        console.log(dataText);
-      })
+      });
 
       blogSection.innerHTML += `
               <div class="blog-card">
