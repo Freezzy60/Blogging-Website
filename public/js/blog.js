@@ -1,7 +1,7 @@
 
 let blogId = decodeURI(location.panthname.split("/").pop());
 
-let docRef = db.collection("blogs").doc(blogId);
+let docRef = db.collection("Blogs").doc(blogId);
 
 docRef.get().then((doc) => {
     if (doc.exists) {

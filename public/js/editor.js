@@ -1,13 +1,11 @@
-import { getDatabase, ref, set, onValue, key, child, push, update, remove}
-from  "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+import { getDatabase, ref, set, onValue, child, push, update, remove }
+    from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 //import { getStorage } from 'firebase/storage/';
 
 const db = getDatabase();
 //const storageDb = getStorage();
 //const storageRef = ref(storageDb, 'images/' + imageName);
 //-- Storage Image in Storage database
-
-
 
 
 //----References-----------------//
@@ -21,40 +19,31 @@ var instBtn = document.getElementById("publishBtn");
 
 //---Insert Data---//
 
-function insertData(){
-    
-    /*var uploadTask = storageRef.put(bannerImage);
-    
-    uploadTask.on('state_changed', function(snapshot){
-        //get task progress by following code
-        var progress = (snapshot.bytesTransferred/snapshot.totalBytes)+100;
-        console.log("upload is"+ progress + "done");
-    },function(error){
-        console.log(error.message);
-    })
-    
-    uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL){
-        
-        
-    })*/
-    push(ref(db, "Blog/"),{
+function insertData() {
+
+    //Get Post key
+    const newPostKey = push(child(ref(db), 'posts')).key;
+
+    //set title and text to db
+    set(ref(db, "Blog/" + newPostKey), {
+        BlogKey: newPostKey,
         Title: blogtitle.value,
         Text: article.value,
-        
-    })
-    .then(() => {
-        alert("data stored successfully");
-    })
-    .catch((error) => {
-        alert("upload failed" + error);
-    });
-    
+        //Alert push done
+    }).then(function () {
+        alert("push done")
+        //Catch error
+    }).catch(function (errror) {
 
-}
+        var error_code = error.code;
+        var error_message = error.message;
 
+        //Alert errror
+        alert(error_message);
+    });    
+};
 
 instBtn.addEventListener('click', insertData);
-
 
 
 //banner
@@ -112,3 +101,4 @@ const addImage = (imagepath, alt) => {
     let textToInsert = `\r![${alt}](${imagepath})\r`;
     articleFeild.value = articleFeild.value.slice(0, curPos) + textToInsert + articleFeild.value.slice(curPos);
 }
+
