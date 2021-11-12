@@ -1,43 +1,74 @@
-import { getDatabase, ref, set, child, update, remove}
-from  "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+import { getDatabase, ref, set, onValue, child, push, update, remove }  from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-storage.js";
 
 const db = getDatabase();
-
+const storageDb = getStorage();
 
 //----References-----------------//
-
 var blogtitle = document.querySelector(".title");
 var article = document.querySelector(".article");
-
 var instBtn = document.getElementById("publishBtn");
 
-//---Insert Data---//
+//---Insert Data to db---//
+function insertData() {
 
-var blogId = 0;
+    //Get Post key
+    const newPostKey = push(child(ref(db), 'posts')).key;
 
-function insertData(){
-        
-    blogId++;    
-    
-    set(ref(db, "Blog/" + blogId),{
+    //set title and text to db
+    set(ref(db, "Blog/" + newPostKey), {
+        BlogKey: newPostKey,
         Title: blogtitle.value,
-        Text: article.value
-    })
-    .then(() => {
-        alert("data stored successfully");
-    })
-    .catch((error) => {
-        alert("upload failed" + error);
-    });
-}
-
+        Text: article.value,
+        //Alert push done
+    }).then(function () {
+        alert("push done")
+        //Catch error
+    }).catch(function (errror) {
+        var error_code = error.code;
+        var error_message = error.message;
+        //Alert errror
+        alert(error_message);
+    });    
+};
 
 instBtn.addEventListener('click', insertData);
 
 
+//---Insert Image to Firebase - Storeage---//
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 //banner
-const bannerImage = document.querySelector('#banner-upload');
 const banner = document.querySelector(".banner");
 let bannerPath;
 
@@ -46,8 +77,8 @@ const uploadInput = document.querySelector('#image-upload');
 
 
 var upload_image = "";
-
-bannerImage.addEventListener("change", function(){
+*/
+/**bannerImage.addEventListener("change", function(){
     const reader = new FileReader();
     reader.addEventListener("load", () => {
         upload_image = reader.result;
@@ -55,7 +86,7 @@ bannerImage.addEventListener("change", function(){
     });
     reader.readAsDataURL(this.files[0]);
 
-})
+})**/
 
 
 /**uploadInput.addEventListener('change', () => {
@@ -84,7 +115,7 @@ bannerImage.addEventListener("change", function(){
         alert("upload Image only")
     }
 }**/
-
+/*
 // This function will let you insrert a text format of your image of example if I upload 1.png then 
 // this function insert something like thie ![1.png](image path) inside our article field.
 const addImage = (imagepath, alt) => {
@@ -92,3 +123,4 @@ const addImage = (imagepath, alt) => {
     let textToInsert = `\r![${alt}](${imagepath})\r`;
     articleFeild.value = articleFeild.value.slice(0, curPos) + textToInsert + articleFeild.value.slice(curPos);
 }
+*/
