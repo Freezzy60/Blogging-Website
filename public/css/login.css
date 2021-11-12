@@ -1,211 +1,75 @@
-
-.navbar button{
-    border: none;
-    background-color: white;
+/*Container Login Position*/
+.container-login{
+position: fixed;
+  opacity: 0;
+  pointer-events: none;
+  right: 5%;
+  top: 60px;
+  height: 280px;
+}
+/*Login Window*/
+.active {  
+  opacity: 1;
+  pointer-events: auto;  
 }
 
-.container-login{    
-    opacity: 0;
-    pointer-events: none;
-}
-
-.active{
-    position: fixed;
-    opacity: 1;
-    pointer-events: auto;  
-    right: 5%;  
-    top: 60px;
-    height: 280px;
-}
-
-.activeEditorBtn{
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.activeLogoutBtn{
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.login{        
-    width: 250px;
-    background-color: white;
-    padding: 20px; 
-}
-
-.login .h4-email{
-    text-align: center;
-}
-
-.login input{
-    background-color: white;
-    margin: 2px 0px 2px 0px;
-    border-left: none;
-    border-top: none;
-    border-right: none;
-    text-decoration: none;
-    width: 200px;
-}
-
-.login input:focus{
-    outline: none;
-    box-shadow: none;
-}
-
-.login .h4-password{
-    text-align: center;
-    margin-top: 10px;
-}
-
-.login button{ 
-    width: 150px;
-    color: black;
-    background-color:white;
-    justify-content: center;
-    margin: 2px 0px 2px 0px;    
-}
-.button-login{
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.button-signUp{
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.password{
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.email{
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.login .forgot-password{
-    text-align: center;
-    margin-top: 20px;
-}
-
-.login .signUp{    
-    text-align: center;
-    margin-top: 20px;
-}
-
-
-
-.button-close{
-    display: flex;
-    justify-content: end;
-}
-    
-#hidePopUp{    
-    cursor: pointer;
-    width: 15px;
-    border:none;
-}
-
+/*Display none links in nav*/
 .in-active{
     display: none;
-    pointer-events: auto;
 }
 
-.login input{
-    background-color: white;
-    margin: 2px 0px 2px 0px;
-    border-left: none;
-    border-top: none;
-    border-right: none;
-    text-decoration: none;
-    width: 200px;
+/*Button login*/
+.login button {
+  width: 150px;
+  color: black;
+  background-color: white;
+  justify-content: center;
+  margin: 2px 0px 2px 0px;
+  height: 30px;
+  border-radius: 50px;
+}
+/*Position Button Login */
+.button-login {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-.active{
-    opacity: 1;
-    pointer-events: auto;    
+/*Button close*/
+#hidePopUp {
+  cursor: pointer;
+  width: 15px;
+  border: none;
+}
+/*Position Button Close*/
+.button-close {
+  display: flex;
+  justify-content: end;
 }
 
-
-.login{        
-    width: 250px;
-    background-color: white;
-    padding: 20px; 
+/*Login Input*/
+.login input {
+  background-color: white;
+  margin: 2px 0px 2px 0px;
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  text-decoration: none;
+  width: 200px;
 }
 
-.login .h4-email{
-    text-align: center;
+/*Login Container Background*/
+.login {
+  width: 250px;
+  background-color: white;
+  padding: 20px;
 }
-
-
-
-.login input:focus{
-    outline: none;
-    box-shadow: none;
+/*Position "Email"*/
+.login .h4-email {
+  text-align: center;
 }
-
-.login .h4-password{
-    text-align: center;
-    margin-top: 10px;
-}
-
-.login button{ 
-    height: 30px;
-    border-radius: 50px;
-    justify-content: center;
-    margin: 2px 0px 2px 0px;    
-}
-.button-login{
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.button-signUp{
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.password{
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.email{
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.login .forgot-password{
-    text-align: center;
-    margin-top: 20px;
-}
-
-.login .signUp{    
-    text-align: center;
-    margin-top: 20px;
-}
-
-.button-close{
-    display: flex;
-    justify-content: end;
-}
-    
-
-.link-editor{
-    opacity: 0;
-    pointer-events: none;
-}
-.active-nav{
-    opacity: 1;
-    pointer-events: auto;        
+/*Position "Password"*/
+.login .h4-password {
+  text-align: center;
+  margin-top: 10px;
 }

@@ -44,14 +44,3 @@
     font-size: 40px;
     margin-top: 80px;
 }
-
-.container-login{    
-    position: fixed;
-    right: 4%;
-    top: 9%;
-    opacity: 0;
-    display: flex;
-    pointer-events: none;
-    justify-content: center;
-    z-index: 9;
-}

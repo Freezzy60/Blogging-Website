@@ -25,9 +25,14 @@ auth.onAuthStateChanged(function (user) {
         //Remove login btn if logged in
         document.getElementById("openLoginLink").classList.add("in-active");
         //Show btn editor
-        document.getElementById("editorBtn").classList.add("activeEditorBtn");
+        document.getElementById("editorBtn").classList.remove("in-active");
         //Show btn logout
-        document.getElementById("logoutLink").classList.add("activeLogoutBtn");
+        document.getElementById("logoutLink").classList.remove("in-active");
+    } else{
+        //add in-active -> display none 0 (editor)
+        document.getElementById("editorBtn").classList.add("in-active");
+        //add in-active -> display none 0 (editor)
+        document.getElementById("logoutLink").classList.add("in-active");
     }
 })
 
