@@ -8,11 +8,11 @@ const db = getDatabase();
 
 
 //References
-let openLoginBtn = document.getElementById("openLogin");
+let openLoginBtn = document.getElementById("openLoginLink");
+let logoutBtn = document.getElementById("logoutLink")
+
 let closeLogin = document.getElementById("closeLogin");
 let loginBtn = document.getElementById("loginBtn");
-let logoutBtn = document.getElementById("logoutBtn")
-let signUpBtn = document.getElementById("signUpBtn");
 
 //
 //User logged in ?
@@ -23,11 +23,11 @@ auth.onAuthStateChanged(function (user) {
         //Remove active -> opactity 0 (login/signup)
         document.getElementById("login").classList.remove("active");
         //Remove login btn if logged in
-        document.getElementById("openLogin").classList.add("in-active");
+        document.getElementById("openLoginLink").classList.add("in-active");
         //Show btn editor
         document.getElementById("editorBtn").classList.add("activeEditorBtn");
         //Show btn logout
-        document.getElementById("logoutBtn").classList.add("activeLogoutBtn");
+        document.getElementById("logoutLink").classList.add("activeLogoutBtn");
     }
 })
 
@@ -40,7 +40,7 @@ function openPopUp() {
 openLoginBtn.addEventListener('click', openPopUp);
 
 //Hide PopUp -> remove .avtive from classlist
-function closePopUp(dialogId) {
+function closePopUp() {
     document.getElementById("login").classList.remove("active");
 }
 
@@ -89,11 +89,11 @@ function signIn() {
     //Remove active -> opactity 0 (login/signup)
     document.getElementById("login").classList.remove("active");
     //Remove login btn if logged in
-    document.getElementById("openLogin").classList.add("in-active");
+    document.getElementById("openLoginLink").classList.add("in-active");
     //Show btn editor
     document.getElementById("editorBtn").classList.add("activeEditorBtn");
     //Show btn logout
-    document.getElementById("logoutBtn").classList.add("activeLogoutBtn");
+    document.getElementById("logoutLink").classList.add("activeLogoutBtn");
 
 };
 
@@ -109,9 +109,9 @@ function logout() {
 
     auth.signOut().then(function () {
         //Remove login btn if logged in
-        document.getElementById("openLogin").classList.remove("in-active");
+        document.getElementById("openLoginLink").classList.remove("in-active");
         document.getElementById("editorBtn").classList.remove("activeEditorBtn");
-        document.getElementById("logoutBtn").classList.remove("activeLogoutBtn");
+        document.getElementById("logoutLink").classList.remove("activeLogoutBtn");
     })
 }
 

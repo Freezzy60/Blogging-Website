@@ -1,4 +1,4 @@
-
+/*
 let blogId = decodeURI(location.panthname.split("/").pop());
 
 let docRef = db.collection("Blogs").doc(blogId);
@@ -63,7 +63,7 @@ const addArticle = (ele, data) => {
 
     });
 }
-
+*/
   
 
 

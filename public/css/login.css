@@ -209,18 +209,3 @@
     opacity: 1;
     pointer-events: auto;        
 }
-
-
-a{
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
-}
-
-button{
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
-}
-

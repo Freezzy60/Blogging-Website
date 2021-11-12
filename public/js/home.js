@@ -1,5 +1,4 @@
-import { getDatabase, ref, onValue }
-  from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
 const db = getDatabase();
 //-- Get Database --//
