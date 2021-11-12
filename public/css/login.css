@@ -18,6 +18,15 @@
     height: 280px;
 }
 
+.activeEditorBtn{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.activeLogoutBtn{
+    opacity: 1;
+    pointer-events: auto;
+}
 
 .login{        
     width: 250px;
@@ -53,7 +62,6 @@
     width: 150px;
     color: black;
     background-color:white;
-    border-radius: 10px;
     justify-content: center;
     margin: 2px 0px 2px 0px;    
 }
@@ -91,10 +99,7 @@
     margin-top: 20px;
 }
 
-a{
-    text-decoration: none;
-    color: black;
-}
+
 
 .button-close{
     display: flex;
@@ -107,6 +112,115 @@ a{
     border:none;
 }
 
-button{
+.in-active{
+    display: none;
+    pointer-events: auto;
+}
+
+.login input{
+    background-color: white;
+    margin: 2px 0px 2px 0px;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    text-decoration: none;
+    width: 200px;
+}
+
+.active{
+    opacity: 1;
+    pointer-events: auto;    
+}
+
+
+.login{        
+    width: 250px;
+    background-color: white;
+    padding: 20px; 
+}
+
+.login .h4-email{
+    text-align: center;
+}
+
+
+
+.login input:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.login .h4-password{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.login button{ 
+    height: 30px;
+    border-radius: 50px;
+    justify-content: center;
+    margin: 2px 0px 2px 0px;    
+}
+.button-login{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.button-signUp{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.password{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.email{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.login .forgot-password{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login .signUp{    
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button-close{
+    display: flex;
+    justify-content: end;
+}
+    
+
+.link-editor{
+    opacity: 0;
+    pointer-events: none;
+}
+.active-nav{
+    opacity: 1;
+    pointer-events: auto;        
+}
+
+
+a{
+    text-decoration: none;
+    color: black;
     cursor: pointer;
 }
+
+button{
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
