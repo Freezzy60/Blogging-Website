@@ -100,45 +100,6 @@ function signIn() {
 //Onclick Sign In button -> login user
 loginBtn.addEventListener('click', signIn);
 
-//
-//Create User with email and password
-//
-
-
-function signUp() {
-
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-
-    // Validate input fields
-    if (validate_email(email) == false || validate_password(password) == false) {
-        alert("Email or Password is Outta Line!!");
-        return;
-    }
-
-    createUserWithEmailAndPassword(auth, email, password)
-        .then(function () {
-
-            set(ref(db, "admin/" + auth.currentUser.uid),
-                {
-                    email: email,
-                    last_login: Date.now(),
-                })
-        })
-        //Catch wrong Login
-        .catch(function (error) {
-            // Firebase will use this to alert of its errors
-            var error_code = error.code;
-            var error_message = error.message;
-
-            alert(error_message);
-
-        })
-}
-
-//Sign Up Button on click -> create user
-signUpBtn.addEventListener('click', signUp);
-
 
 //
 //Logout
