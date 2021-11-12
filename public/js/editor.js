@@ -1,24 +1,15 @@
-import { getDatabase, ref, set, onValue, child, push, update, remove }
-    from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
-//import { getStorage } from 'firebase/storage/';
+import { getDatabase, ref, set, onValue, child, push, update, remove }  from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-storage.js";
 
 const db = getDatabase();
-//const storageDb = getStorage();
-//const storageRef = ref(storageDb, 'images/' + imageName);
-//-- Storage Image in Storage database
-
+const storageDb = getStorage();
 
 //----References-----------------//
-
 var blogtitle = document.querySelector(".title");
 var article = document.querySelector(".article");
-//var imageName = bannerImage.name;
-
 var instBtn = document.getElementById("publishBtn");
 
-
-//---Insert Data---//
-
+//---Insert Data to db---//
 function insertData() {
 
     //Get Post key
@@ -34,10 +25,8 @@ function insertData() {
         alert("push done")
         //Catch error
     }).catch(function (errror) {
-
         var error_code = error.code;
         var error_message = error.message;
-
         //Alert errror
         alert(error_message);
     });    
@@ -46,6 +35,38 @@ function insertData() {
 instBtn.addEventListener('click', insertData);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 //banner
 const banner = document.querySelector(".banner");
 let bannerPath;
@@ -55,7 +76,7 @@ const uploadInput = document.querySelector('#image-upload');
 
 
 var upload_image = "";
-
+*/
 /**bannerImage.addEventListener("change", function(){
     const reader = new FileReader();
     reader.addEventListener("load", () => {
@@ -93,7 +114,7 @@ var upload_image = "";
         alert("upload Image only")
     }
 }**/
-
+/*
 // This function will let you insrert a text format of your image of example if I upload 1.png then 
 // this function insert something like thie ![1.png](image path) inside our article field.
 const addImage = (imagepath, alt) => {
@@ -101,4 +122,4 @@ const addImage = (imagepath, alt) => {
     let textToInsert = `\r![${alt}](${imagepath})\r`;
     articleFeild.value = articleFeild.value.slice(0, curPos) + textToInsert + articleFeild.value.slice(curPos);
 }
-
+*/

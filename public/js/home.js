@@ -43,6 +43,6 @@ var query = ref(db, "Blog");
                <p id="blog-overview">${dataText}</p>
                <a href="/" class="btn dark">read</a>
               </div>
-              `;
+              `;              
     })
   });
