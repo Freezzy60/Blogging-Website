@@ -87,7 +87,7 @@ function signIn() {
             var error_code = error.code;
             var error_message = error.message;
 
-            alert(error_message);
+            alert(error_code + error_message);
 
         })
 
