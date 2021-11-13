@@ -1,21 +1,47 @@
 /*Container Login Position*/
-.container-login{
-position: fixed;
+.container-login {
+  position: fixed;
   opacity: 0;
   pointer-events: none;
   right: 5%;
-  top: 60px;
+  top: 80px;
   height: 280px;
 }
+
+/*Container email padding*/
+.login .email-container {
+  padding-top: 10%;
+}
+
+/*Container password padding*/
+.login .password-container {
+  padding-top: 10%;
+}
+
+/*Container button padding*/
+.login .button-container{
+  padding-top: 10%;
+}
+
+/*Login Container Background and size*/
+.login {
+  width: 250px;
+  height: 300px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10%;
+  opacity: 0.9;
+}
+
 /*Login Window*/
-.active {  
+.active {
   opacity: 1;
-  pointer-events: auto;  
+  pointer-events: auto;
 }
 
 /*Display none links in nav*/
-.in-active{
-    display: none;
+.in-active {
+  display: none;
 }
 
 /*Button login*/
@@ -58,18 +84,17 @@ position: fixed;
   width: 200px;
 }
 
-/*Login Container Background*/
-.login {
-  width: 250px;
-  background-color: white;
-  padding: 20px;
+/* Outline Input field none*/
+.login input:focus {
+  outline: none;
 }
+
 /*Position "Email"*/
 .login .h4-email {
   text-align: center;
 }
+
 /*Position "Password"*/
 .login .h4-password {
   text-align: center;
-  margin-top: 10px;
 }
