@@ -8,10 +8,6 @@
   height: auto;
 }
 
-/*Container email padding*/
-.login .email-container {
-}
-
 /*Container password padding*/
 .login .password-container {
   padding-top: 15%;
@@ -89,7 +85,7 @@
 }
 
 /*Position "Email"*/
-.login .h4-email {
+.login .h4-userName {
   text-align: center;
   padding-bottom: 5%;
 }

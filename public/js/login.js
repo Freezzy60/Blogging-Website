@@ -1,5 +1,5 @@
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
-import { getDatabase, ref, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+import { getDatabase, ref, set, child, update, remove, onValue, orderByChild } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
 //Auth
 const auth = getAuth();
@@ -13,6 +13,8 @@ let logoutBtn = document.getElementById("logoutLink")
 
 let closeLogin = document.getElementById("closeLogin");
 let loginBtn = document.getElementById("loginBtn");
+
+let signUpButton = document.getElementById("btn-signUp");
 
 //
 //User logged in ?
@@ -28,7 +30,7 @@ auth.onAuthStateChanged(function (user) {
         document.getElementById("editorBtn").classList.remove("in-active");
         //Show btn logout
         document.getElementById("logoutLink").classList.remove("in-active");
-    } else{
+    } else {
         //add in-active -> display none 0 (editor)
         document.getElementById("editorBtn").classList.add("in-active");
         //add in-active -> display none 0 (editor)
@@ -52,58 +54,66 @@ function closePopUp() {
 closeLogin.addEventListener('click', closePopUp);
 
 //
-//Login User with email
+//Login User with email  PW: FreiRaum1234!Innsbruck?
 //
 
 
 function signIn() {
 
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
+    var user = document.getElementById("userName").value.toLowerCase();
+    var password = document.getElementById("password").value;
+    var userNameDb = "";
+    var emailUser = "";  
+    var queryAdmin = ref(db, "admin");   
 
-    // Validate input fields
-    if (validate_email(email) == false || validate_password(password) == false) {
-        alert("Email or Password is Outta Line!!");
-        return;
-    };
+    
 
-    //sign in with eamil and password
-    signInWithEmailAndPassword(auth, email, password)
-        .then(function () {
-
-            //Logout if tab close or browser close
-            auth.setPersistence(browserSessionPersistence);
-
-            //update user infos in db
-            update(ref(db, "admin/" + auth.currentUser.uid),
-                {
-                    email: email,
-                    last_login: Date.now(),
-                })
+    onValue(queryAdmin, (snapshot) => {
+        snapshot.forEach(function (childSnapshot){
+            console.log(childSnapshot.val());
         })
-        //Catch wrong Login
-        .catch(function (error) {
-            // Firebase will use this to alert of its errors
-            var error_code = error.code;
-            var error_message = error.message;
+    });
+        
+    
 
-            alert(error_code + error_message);
 
-        })
 
-    //Remove active -> opactity 0 (login/signup)
-    document.getElementById("login").classList.remove("active");
-    //Remove login btn if logged in
-    document.getElementById("openLoginLink").classList.add("in-active");
-    //Show btn editor
-    document.getElementById("editorBtn").classList.add("activeEditorBtn");
-    //Show btn logout
-    document.getElementById("logoutLink").classList.add("activeLogoutBtn");
+
 
 };
 
 //Onclick Sign In button -> login user
 loginBtn.addEventListener('click', signIn);
+
+function signUp() {
+
+    var email = document.getElementById("email").value;
+    var userName = document.getElementById("userName").value;
+    var password = document.getElementById("password").value;
+
+
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in 
+            //update user infos in db
+            set(ref(db, "admin/" + auth.currentUser.uid),
+                {
+                    user: userName,
+                    email: email,
+                    last_login: Date.now(),
+                })
+
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            alert(errorCode + errorMessage);
+        });
+}
+
+//Sign Up with new User
+signUpButton.addEventListener('click', signUp);
 
 
 //
