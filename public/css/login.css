@@ -5,32 +5,30 @@
   pointer-events: none;
   right: 5%;
   top: 80px;
-  height: 280px;
+  height: auto;
 }
 
 /*Container email padding*/
 .login .email-container {
-  padding-top: 10%;
 }
 
 /*Container password padding*/
 .login .password-container {
-  padding-top: 10%;
+  padding-top: 15%;
 }
 
 /*Container button padding*/
-.login .button-container{
-  padding-top: 10%;
+.login .button-container {
+  padding-top: 0%;
 }
 
 /*Login Container Background and size*/
 .login {
   width: 250px;
-  height: 300px;
-  background-color: white;
+  height: auto;
   padding: 20px;
   border-radius: 10%;
-  opacity: 0.9;
+  background: white;
 }
 
 /*Login Window*/
@@ -46,19 +44,20 @@
 
 /*Button login*/
 .login button {
-  width: 150px;
+  width: auto;
   color: black;
-  background-color: white;
   justify-content: center;
   margin: 2px 0px 2px 0px;
-  height: 30px;
-  border-radius: 50px;
+  border: none;
+  outline: none;
+  background: white;
 }
 /*Position Button Login */
 .button-login {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  text-align: center;
 }
 
 /*Button close*/
@@ -67,6 +66,7 @@
   width: 15px;
   border: none;
 }
+
 /*Position Button Close*/
 .button-close {
   display: flex;
@@ -75,13 +75,12 @@
 
 /*Login Input*/
 .login input {
-  background-color: white;
-  margin: 2px 0px 2px 0px;
-  border-left: none;
-  border-top: none;
-  border-right: none;
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: rgb(255, 255, 255, 0.5);
   text-decoration: none;
   width: 200px;
+  height: 20px;
 }
 
 /* Outline Input field none*/
@@ -92,9 +91,18 @@
 /*Position "Email"*/
 .login .h4-email {
   text-align: center;
+  padding-bottom: 5%;
 }
 
 /*Position "Password"*/
 .login .h4-password {
   text-align: center;
+  padding-bottom: 5%;
+}
+
+/*Position Login */
+.logoLogin{
+  display: flex;
+  padding-top: 10% active;
+  justify-content: center;
 }

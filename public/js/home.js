@@ -10,7 +10,7 @@ var dataTitle = "";
 //Text of Title
 var dataText = "";
 
-//Get all blogs from db
+//Get blogs from db
 var query = ref(db, "Blog");
 
 //Print all Blogs on website
