@@ -27,13 +27,13 @@
   width: 250px;
   height: auto;
   padding: 20px;
-  border-radius: 10%;
+  border-radius: 40px;
   background: white;
 }
 
 /*Login Window*/
 .active {
-  opacity: 1;
+  opacity: 0.8;
   pointer-events: auto;
 }
 
@@ -44,19 +44,19 @@
 
 /*Button login*/
 .login button {
-  width: auto;
+  width: 120px;
+  height: 30px;
   color: black;
   justify-content: center;
   margin: 2px 0px 2px 0px;
-  border: none;
-  outline: none;
   background: white;
+  border-radius: 20px;
 }
 /*Position Button Login */
 .button-login {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 20%;
   text-align: center;
 }
 
@@ -103,6 +103,6 @@
 /*Position Login */
 .logoLogin{
   display: flex;
-  padding-top: 10% active;
+  padding-top: 15%;
   justify-content: center;
 }
