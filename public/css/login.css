@@ -18,6 +18,16 @@
   padding-top: 0%;
 }
 
+/*Container Change Password Style*/
+.container-changePw{
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  right: 5%;
+  top: 80px;
+  height: auto;
+}
+
 /*Login Container Background and size*/
 .login {
   width: 250px;

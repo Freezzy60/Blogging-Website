@@ -1,13 +1,59 @@
-.container-changePw{
-    opacity: 0;
-    pointer-events: none;
-    position: fixed;
-    right: 5%;
-    top: 80px;
-    height: auto;
+/*Button close*/
+#hidePopUpPw {
+  cursor: pointer;
+  width: 15px;
+  border: none;
 }
 
-.active{
-    opacity: 1;
-    pointer-events: auto;
+.changePassword {
+  width: 250px;
+  height: auto;
+  padding: 20px;
+  border-radius: 20px;
+  background: white;
+}
+
+/*Button login*/
+.changePassword button {
+  width: 120px;
+  height: 30px;
+  color: black;
+  justify-content: center;
+  margin: 2px 0px 2px 0px;
+  background: white;
+  border-radius: 20px;
+}
+
+/*Position Button Login */
+.button-save {
+  display: flex;
+  justify-content: center;
+  margin-top: 20%;
+  text-align: center;
+}
+
+/*Login Input*/
+.changePassword input {
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: rgb(255, 255, 255, 0.5);
+  text-decoration: none;
+  width: 100%;
+  height: 20px;
+  text-align: center;
+}
+
+/* Outline Input field none*/
+.changePassword input:focus {
+  outline: none;
+}
+
+/*Position "Email"*/
+.changePassword .h4-pw {
+  text-align: center;
+  padding-bottom: 5%;
+}
+
+.containerPw2 {
+  padding-top: 20px;
 }

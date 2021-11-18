@@ -120,6 +120,11 @@ function signIn() {
 
         signInWithEmailAndPassword(auth, emailAdmin, password)
             .then(() => {
+
+                
+                //Logout if tab close or browser close
+                auth.setPersistence(browserSessionPersistence);
+
                 //Remove active -> opactity 0 (login/signup)
                 document.getElementById("login").classList.remove("active");
                 //Remove login btn if logged in
