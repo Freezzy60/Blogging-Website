@@ -1,4 +1,4 @@
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, browserSessionPersistence, updatePassword } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
 import { getDatabase, ref, set, child, update, remove, onValue, orderByChild } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
 //Auth
@@ -6,15 +6,24 @@ const auth = getAuth();
 //Database
 const db = getDatabase();
 
-
+//
 //References
-let openLoginBtn = document.getElementById("openLoginLink");
-let logoutBtn = document.getElementById("logoutLink")
+//
 
+//Login pop up open / close
+let openLoginBtn = document.getElementById("openLoginLink");
 let closeLogin = document.getElementById("closeLogin");
+
+//Login btn / logout btn
+let logoutBtn = document.getElementById("logoutLink")
 let loginBtn = document.getElementById("loginBtn");
 
-let signUpButton = document.getElementById("btn-signUp");
+//Change pw pop up open / close
+let openChangePw = document.getElementById("openChangePw");
+let closeChangePw = document.getElementById("closeChangePw");
+
+//Btn save new password
+let saveNewPw = document.getElementById("changePwBtn");
 
 //
 //User logged in ?
@@ -30,23 +39,33 @@ auth.onAuthStateChanged(function (user) {
         document.getElementById("editorBtn").classList.remove("in-active");
         //Show btn logout
         document.getElementById("logoutLink").classList.remove("in-active");
+        //Show btn change pw
+        document.getElementById("openChangePw").classList.remove("in-active");
     } else {
         //add in-active -> display none 0 (editor)
         document.getElementById("editorBtn").classList.add("in-active");
         //add in-active -> display none 0 (editor)
         document.getElementById("logoutLink").classList.add("in-active");
+        //add in-active -> display none 0 (editor)
+        document.getElementById("openChangePw").classList.add("in-active");
+
     }
 })
 
-
+//
 //Show PopUp -> add .active to classlist
+//
+
 function openPopUp() {
     document.getElementById("login").classList.add("active");
 }
 
 openLoginBtn.addEventListener('click', openPopUp);
 
+//
 //Hide PopUp -> remove .avtive from classlist
+//
+
 function closePopUp() {
     document.getElementById("login").classList.remove("active");
 }
@@ -54,9 +73,28 @@ function closePopUp() {
 closeLogin.addEventListener('click', closePopUp);
 
 //
-//Login User with email  PW: FreiRaum1234!Innsbruck?
+//Show PopUp Change PW -> add .active to classlist
 //
 
+function openPopUpPw() {
+    document.getElementById("changePw").classList.add("active");
+}
+
+openChangePw.addEventListener('click', openPopUpPw);
+
+//
+//Hide PopUp -> remove .avtive from classlist
+//
+
+function closePopUpPw() {
+    document.getElementById("changePw").classList.remove("active");
+}
+
+closeChangePw.addEventListener('click', closePopUpPw);
+
+//
+//Login User with email  PW: FreiRaum1234!Innsbruck?
+//
 
 function signIn() {
 
@@ -103,8 +141,6 @@ function signIn() {
 //Onclick Sign In button -> login user
 loginBtn.addEventListener('click', signIn);
 
-
-
 //
 //Logout
 //
@@ -121,6 +157,39 @@ function logout() {
 
 //Logout button on click -> logout user
 logoutBtn.addEventListener('click', logout)
+
+//
+//Change Password Admin User
+//
+
+function saveNewPassword() {
+
+    var pw1 = document.getElementById("pw1").value;
+    var pw2 = document.getElementById("pw2").value;
+
+    //Check pw1 and pw2 same same?
+    if (pw1 == pw2) {
+
+        //get current user
+        const user = auth.currentUser;
+        //new password
+        const newPassword = pw1;
+
+        //update password
+        updatePassword(user, newPassword).then(() => {
+            // Update successful.
+            console.log("ok");
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            alert(errorCode + errorMessage);
+        });
+    }
+}
+
+//Save button on click -> save new password
+saveNewPw.addEventListener('click', saveNewPassword)
 
 //
 // Check Email

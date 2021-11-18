@@ -1,0 +1,13 @@
+.container-changePw{
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    right: 5%;
+    top: 80px;
+    height: auto;
+}
+
+.active{
+    opacity: 1;
+    pointer-events: auto;
+}
