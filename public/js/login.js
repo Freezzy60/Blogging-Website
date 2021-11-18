@@ -62,58 +62,47 @@ function signIn() {
 
     var user = document.getElementById("userName").value.toLowerCase();
     var password = document.getElementById("password").value;
-    var userNameDb = "";
-    var emailUser = "";  
-    var queryAdmin = ref(db, "admin");   
-
-    
+    var emailAdmin = "";
+    var queryAdmin = ref(db, user);
 
     onValue(queryAdmin, (snapshot) => {
-        snapshot.forEach(function (childSnapshot){
-            console.log(childSnapshot.val());
+        snapshot.forEach(function (childSnapshot) {
+
+            //Get key of admin
+            const adminKey = childSnapshot.key;
+
+            //Get ref to admin email
+            const emailAdminRef = ref(db, user + '/' + adminKey + '/email');
+
+            //Get Email
+            onValue(emailAdminRef, (snapshot) => {
+                emailAdmin = snapshot.val().toString();
+            })
         })
+
+        signInWithEmailAndPassword(auth, emailAdmin, password)
+            .then(() => {
+                //Remove active -> opactity 0 (login/signup)
+                document.getElementById("login").classList.remove("active");
+                //Remove login btn if logged in
+                document.getElementById("openLoginLink").classList.add("in-active");
+                //Show btn editor
+                document.getElementById("editorBtn").classList.remove("in-active");
+                //Show btn logout
+                document.getElementById("logoutLink").classList.remove("in-active");
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+
+                alert(errorCode + errorMessage);
+            });
     });
-        
-    
-
-
-
-
-
 };
 
 //Onclick Sign In button -> login user
 loginBtn.addEventListener('click', signIn);
 
-function signUp() {
-
-    var email = document.getElementById("email").value;
-    var userName = document.getElementById("userName").value;
-    var password = document.getElementById("password").value;
-
-
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            //update user infos in db
-            set(ref(db, "admin/" + auth.currentUser.uid),
-                {
-                    user: userName,
-                    email: email,
-                    last_login: Date.now(),
-                })
-
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-
-            alert(errorCode + errorMessage);
-        });
-}
-
-//Sign Up with new User
-signUpButton.addEventListener('click', signUp);
 
 
 //
