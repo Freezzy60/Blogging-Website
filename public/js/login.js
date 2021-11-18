@@ -25,6 +25,11 @@ let closeChangePw = document.getElementById("closeChangePw");
 //Btn save new password
 let saveNewPw = document.getElementById("changePwBtn");
 
+//Get input by id
+
+let changePw1 = document.getElementById("pw1");
+let changePw2 = document.getElementById("pw2");
+
 //
 //User logged in ?
 //
@@ -87,7 +92,12 @@ openChangePw.addEventListener('click', openPopUpPw);
 //
 
 function closePopUpPw() {
+
+    changePw1.value = "";
+    changePw2.value = "";
+
     document.getElementById("changePw").classList.remove("active");
+
 }
 
 closeChangePw.addEventListener('click', closePopUpPw);
@@ -101,7 +111,8 @@ function signIn() {
     var user = document.getElementById("userName").value.toLowerCase();
     var password = document.getElementById("password").value;
     var emailAdmin = "";
-    var queryAdmin = ref(db, user);
+    var username = "";
+    var queryAdmin = ref(db, 'admin/');
 
     onValue(queryAdmin, (snapshot) => {
         snapshot.forEach(function (childSnapshot) {
@@ -109,38 +120,61 @@ function signIn() {
             //Get key of admin
             const adminKey = childSnapshot.key;
 
+            //Get ref to user name
+            const usernameRef = ref(db, user + '/' + adminKey + '/user');
+
             //Get ref to admin email
             const emailAdminRef = ref(db, user + '/' + adminKey + '/email');
 
-            //Get Email
-            onValue(emailAdminRef, (snapshot) => {
-                emailAdmin = snapshot.val().toString();
-            })
-        })
-
-        signInWithEmailAndPassword(auth, emailAdmin, password)
-            .then(() => {
-
-                
-                //Logout if tab close or browser close
-                auth.setPersistence(browserSessionPersistence);
-
-                //Remove active -> opactity 0 (login/signup)
-                document.getElementById("login").classList.remove("active");
-                //Remove login btn if logged in
-                document.getElementById("openLoginLink").classList.add("in-active");
-                //Show btn editor
-                document.getElementById("editorBtn").classList.remove("in-active");
-                //Show btn logout
-                document.getElementById("logoutLink").classList.remove("in-active");
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-
-                alert(errorCode + errorMessage);
+            //Get user name
+            onValue(usernameRef, (snapshot) => {
+                username = snapshot.val().toString().toLowerCase();
             });
-    });
+
+            console.log(username);
+            console.log(user);
+
+            if (username == user) {
+                //Get Email
+                onValue(emailAdminRef, (snapshot) => {
+                    emailAdmin = snapshot.val().toString();
+                });
+
+                console.log(emailAdmin);
+
+                signInWithEmailAndPassword(auth, emailAdmin, password)
+                    .then(() => {
+
+                        //Set persistance -> Logout if tab close or browser close
+                        auth.setPersistence(browserSessionPersistence);
+
+                        //Remove active -> opactity 0 (login/signup)
+                        document.getElementById("login").classList.remove("active");
+                        //Remove login btn if logged in
+                        document.getElementById("openLoginLink").classList.add("in-active");
+                        //Show btn editor
+                        document.getElementById("editorBtn").classList.remove("in-active");
+                        //Show btn logout
+                        document.getElementById("logoutLink").classList.remove("in-active");
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+
+                        alert(errorCode);
+                        alert(errorMessage);
+
+                        if (errorCode == "auth/wrong-password") {
+                            alert("wrong user or password")
+                        };
+                    });
+            } else {
+               alert("wrong user or password")
+            }
+        });
+
+
+    })
 };
 
 //Onclick Sign In button -> login user
@@ -183,14 +217,21 @@ function saveNewPassword() {
         //update password
         updatePassword(user, newPassword).then(() => {
             // Update successful.
-            console.log("ok");
+            //Remove active -> opactity 0 (login/signup)
+            document.getElementById("changePw").classList.remove("active");
+            alert("password changed");
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
 
             alert(errorCode + errorMessage);
         });
+    } else {
+        alert("password 1 and password 2 not the same")
     }
+
+    changePw1.value = "";
+    changePw2.value = "";
 }
 
 //Save button on click -> save new password
