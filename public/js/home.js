@@ -4,7 +4,6 @@ const db = getDatabase();
 //-- Get Database --//
 const blogSection = document.getElementById("blog-section");
 
-
 //Title of Blog
 var dataTitle = "";
 //Text of Title
@@ -14,6 +13,8 @@ var dataImage = "";
 
 //Get blogs from db
 var query = ref(db, "Blog");
+
+
 
 //Print all Blogs on website
   onValue(query, (snapshot) => {
@@ -45,13 +46,13 @@ var query = ref(db, "Blog");
          dataImage = snapshot.val();
       });
 
-
       blogSection.innerHTML += `
               <div class="blog-card">
                <img src=${dataImage} alt="header" class="blog-image">
                <h1 id="blog-title">${dataTitle}</h1>
                <p id="blog-overview">${dataText}</p>
                <a href="/" class="btn dark">read</a>
+               <button class="deleteBtn" id=${dataTitle}></button>
               </div>
               `;              
     })
