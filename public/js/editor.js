@@ -28,11 +28,12 @@ function insertData(URL) {
     var name = namebox.value;
     var ext = extlab.innerHTML;
 
+
     //Get Post key
     const newPostKey = push(child(ref(db), 'posts')).key;
 
     //set title and text to db
-    set(ref(db, "Blog/" + newPostKey), {
+    set(ref(db, "Blog/" + blogtitle.value), {
         BlogKey: newPostKey,
         Title: blogtitle.value,
         Text: article.value,
