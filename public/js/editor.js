@@ -50,7 +50,7 @@ function insertData(URL) {
     });
 };
 
-instBtn.addEventListener('click', insertData);
+//instBtn.addEventListener('click', insertData);
 
 //---Insert Image into Storage---//
 
@@ -126,7 +126,7 @@ async function uploadProcess() {
 
 }
 
-upBtn.onclick = uploadProcess;
+instBtn.onclick = uploadProcess;
 
 /*
 //banner
