@@ -1,10 +1,11 @@
-import { getAuth, signInWithEmailAndPassword, browserSessionPersistence, updatePassword } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, browserSessionPersistence, updatePassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
 import { getDatabase, ref, set, child, update, remove, onValue, orderByChild } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
 //Auth
 const auth = getAuth();
 //Database
 const db = getDatabase();
+
 
 //
 //References
@@ -29,6 +30,8 @@ let saveNewPw = document.getElementById("changePwBtn");
 
 let changePw1 = document.getElementById("pw1");
 let changePw2 = document.getElementById("pw2");
+let pwInput = document.getElementById("password");
+
 
 //
 //User logged in ?
@@ -160,15 +163,13 @@ function signIn() {
                     .catch((error) => {
                         const errorCode = error.code;
                         const errorMessage = error.message;
-
-                        alert(errorCode);
-                        alert(errorMessage);
-
+                        
                         if (errorCode == "auth/wrong-password") {
+                            pwInput.value = "";
                             alert("wrong user or password")
                         };
                     });
-            } else {
+            } else {                
                alert("wrong user or password")
             }
         });
