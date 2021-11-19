@@ -15,7 +15,7 @@ var instBtn = document.getElementById("publishBtn");
 var bannerImage = document.getElementById('banner-upload');
 var namebox = document.getElementById('namebox');
 var proglab = document.getElementById('upprogress');
-var upBtn = document.getElementById('upBtn');
+//var upBtn = document.getElementById('upBtn');
 var extlab = document.getElementById('extlab');
 var selBtn = document.getElementById('selbtn');
 
@@ -128,6 +128,11 @@ async function uploadProcess() {
 }
 
 instBtn.onclick = uploadProcess;
+
+
+
+
+
 
 /*
 //banner
