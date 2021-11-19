@@ -9,6 +9,8 @@ const blogSection = document.getElementById("blog-section");
 var dataTitle = "";
 //Text of Title
 var dataText = "";
+//Url of Image
+var dataImage = "";
 
 //Get blogs from db
 var query = ref(db, "Blog");
@@ -35,13 +37,22 @@ var query = ref(db, "Blog");
         dataText = snapshot.val().toString();
       });
 
+      //Get Ref to Image at db
+      const blogImageBanner = ref(db, 'Blog/' + blogKey + '/ImgUrl');
+
+      //Get Img from db
+      onValue(blogImageBanner, (snapshot) => {
+         dataImage = snapshot.val();
+      });
+
+
       blogSection.innerHTML += `
               <div class="blog-card">
-               <img src="img/banner.jpg" alt="header" class="blog-image">
+               <img src=${dataImage} alt="header" class="blog-image">
                <h1 id="blog-title">${dataTitle}</h1>
                <p id="blog-overview">${dataText}</p>
                <a href="/" class="btn dark">read</a>
               </div>
-              `;
+              `;              
     })
   });
