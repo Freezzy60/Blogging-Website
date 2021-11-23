@@ -66,10 +66,13 @@ let counterId = 0;
       //Onclick delete Blog
       newBlog.addEventListener('click', removeBlog);
 
+      //Remove blog
       function removeBlog(){
         //Get Ref to blog at db
         const currentBlog = ref(db, 'Blog/' + blogKey);
+        //Remove blog
         remove(currentBlog);
+        //refresh page
         location.reload();       
       }
     })

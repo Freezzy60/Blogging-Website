@@ -1,9 +1,9 @@
 import { getAuth, signInWithEmailAndPassword, browserSessionPersistence, updatePassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
 import { getDatabase, ref, set, child, update, remove, onValue, orderByChild } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
-//Auth
+//Get auth firebase
 const auth = getAuth();
-//Database
+//Get database firebase
 const db = getDatabase();
 
 
@@ -27,7 +27,6 @@ let closeChangePw = document.getElementById("closeChangePw");
 let saveNewPw = document.getElementById("changePwBtn");
 
 //Get input by id
-
 let changePw1 = document.getElementById("pw1");
 let changePw2 = document.getElementById("pw2");
 let pwInput = document.getElementById("password");
@@ -37,6 +36,7 @@ let pwInput = document.getElementById("password");
 //User logged in ?
 //
 
+//Check user logged in ?
 auth.onAuthStateChanged(function (user) {
     if (user) {
         //Remove active -> opactity 0 (login/signup)
@@ -87,7 +87,7 @@ closeLogin.addEventListener('click', closePopUp);
 function openPopUpPw() {
     document.getElementById("changePw").classList.add("active");
 }
-
+//Onclick -> open pop up
 openChangePw.addEventListener('click', openPopUpPw);
 
 //
@@ -96,9 +96,11 @@ openChangePw.addEventListener('click', openPopUpPw);
 
 function closePopUpPw() {
 
+    //On close pop up set value to ""
     changePw1.value = "";
     changePw2.value = "";
 
+    //get Element by id / remove class active
     document.getElementById("changePw").classList.remove("active");
 
 }
@@ -134,9 +136,6 @@ function signIn() {
                 username = snapshot.val().toString().toLowerCase();
             });
 
-            console.log(username);
-            console.log(user);
-
             if (username == user) {
                 //Get Email
                 onValue(emailAdminRef, (snapshot) => {
@@ -163,18 +162,16 @@ function signIn() {
                     .catch((error) => {
                         const errorCode = error.code;
                         const errorMessage = error.message;
-                        
+
                         if (errorCode == "auth/wrong-password") {
                             pwInput.value = "";
                             alert("wrong user or password")
                         };
                     });
-            } else {                
-               alert("wrong user or password")
+            } else {
+                alert("wrong user or password")
             }
         });
-
-
     })
 };
 
