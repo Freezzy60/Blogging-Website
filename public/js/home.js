@@ -1,9 +1,7 @@
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 
-const db = getDatabase();
 //-- Get Database --//
-const blogSection = document.getElementById("blog-section");
-
+const db = getDatabase();
 //Title of Blog
 var dataTitle = "";
 //Text of Title
@@ -13,6 +11,9 @@ var dataImage = "";
 
 //Get blogs from db
 var query = ref(db, "Blog");
+
+//Counter Id of div (blog)
+let counterId = 0;
 
 
 
@@ -46,14 +47,30 @@ var query = ref(db, "Blog");
          dataImage = snapshot.val();
       });
 
-      blogSection.innerHTML += `
-              <div class="blog-card">
-               <img src=${dataImage} alt="header" class="blog-image">
-               <h1 id="blog-title">${dataTitle}</h1>
-               <p id="blog-overview">${dataText}</p>
-               <a href="/" class="btn dark">read</a>
-               <button class="deleteBtn" id=${dataTitle}></button>
-              </div>
-              `;              
+      //Create new div
+      let newBlog = document.createElement('div');
+      //set id div
+      newBlog.id = "blog" + counterId;
+      //add classname div
+      newBlog.className = "blog-card";
+      //inner html div
+      newBlog.innerHTML ='<img src='+dataImage+' alt="header" class="blog-image">'+
+      '<h1 id=blog-title>'+dataTitle+'</h1>'+
+      '<p id="blog-overview">'+dataText+'</p>'+
+      '<a href="/" class="btn dark">read</a>'+
+      '<input type="button" id="button '+counterId+'" value="Delete" class = "btn dark"/>'
+
+      //append newBlog -> blog-selection
+      document.getElementById("blog-section").appendChild(newBlog);
+
+      //Onclick delete Blog
+      newBlog.addEventListener('click', removeBlog);
+
+      function removeBlog(){
+        //Get Ref to blog at db
+        const currentBlog = ref(db, 'Blog/' + blogKey);
+        remove(currentBlog);
+        location.reload();       
+      }
     })
   });
