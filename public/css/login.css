@@ -112,3 +112,11 @@
   padding-top: 15%;
   justify-content: center;
 }
+
+.infoUserandPw{
+opacity: 0;
+};
+
+h6{
+  color: red;
+}
