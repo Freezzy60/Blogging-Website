@@ -137,44 +137,41 @@ function signIn() {
             });
 
             //chech user
-            if (username == user) {
-                //Get Email
-                onValue(emailAdminRef, (snapshot) => {
-                    emailAdmin = snapshot.val().toString();
+
+            //Get Email
+            onValue(emailAdminRef, (snapshot) => {
+                emailAdmin = snapshot.val().toString();
+            });
+
+            //Sign in with email and password -> firebase
+            signInWithEmailAndPassword(auth, emailAdmin, password)
+                .then(() => {
+
+                    //Set persistance -> Logout if tab close or browser close
+                    auth.setPersistence(browserSessionPersistence);
+
+                    //Remove active -> opactity 0 (login/signup)
+                    document.getElementById("login").classList.remove("active");
+                    //Remove login btn if logged in
+                    document.getElementById("openLoginLink").classList.add("in-active");
+                    //Show btn editor
+                    document.getElementById("editorBtn").classList.remove("in-active");
+                    //Show btn logout
+                    document.getElementById("logoutLink").classList.remove("in-active");
+                })
+                //cath error
+                .catch((error) => {
+
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+
+                    document.getElementById("infoLogin").classList.remove("infoUserandPw");
+
+                    document.getElementById("infoLogin").classList.add("active");
+                    pwInput.value = "";
                 });
 
-                //Sign in with email and password -> firebase
-                signInWithEmailAndPassword(auth, emailAdmin, password)
-                    .then(() => {
 
-                        //Set persistance -> Logout if tab close or browser close
-                        auth.setPersistence(browserSessionPersistence);
-
-                        //Remove active -> opactity 0 (login/signup)
-                        document.getElementById("login").classList.remove("active");
-                        //Remove login btn if logged in
-                        document.getElementById("openLoginLink").classList.add("in-active");
-                        //Show btn editor
-                        document.getElementById("editorBtn").classList.remove("in-active");
-                        //Show btn logout
-                        document.getElementById("logoutLink").classList.remove("in-active");
-                    })
-                    //cath error
-                    .catch((error) => {
-
-                        const errorCode = error.code;
-                        const errorMessage = error.message;
-
-                        document.getElementById("infoLogin").classList.remove("infoUserandPw");
-
-                        document.getElementById("infoLogin").classList.add("active");
-                        pwInput.value = "";
-                    });
-            } else {
-                document.getElementById("infoLogin").classList.remove("infoUserandPw");
-                document.getElementById("infoLogin").classList.add("active");
-                pwInput.value = "";
-            }
         });
     })
 };
@@ -209,7 +206,7 @@ function saveNewPassword() {
     var pw2 = document.getElementById("pw2").value;
 
     //Check pw1 and pw2 same same?
-    if (pw1 == pw2) {
+    if (pw1 == pw2 && validate_password(pw1)) {
 
         //get current user
         const user = auth.currentUser;
