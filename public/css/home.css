@@ -50,7 +50,7 @@ body{
 .header{
     margin-top: 60px;
     width: 100%;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 500px);
     background: url(../img/banner.jpg);
     background-size: cover;
     display: flex;
@@ -72,7 +72,8 @@ body{
 
 .heading .small{
     display: block;
-    font-size: 40px;
+    font-size: 50px;
+    color:black;
 }
 
 .heading .no-fill{
@@ -100,7 +101,7 @@ body{
 
 .blog-image{
     width: 100%;
-    height: 250px;
+    height: 400px;
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 10px;
