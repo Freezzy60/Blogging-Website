@@ -1,82 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog</title>
-    <link rel="stylesheet" href="./css/home.css" />
-    <link rel="stylesheet" href="./css/editor.css" />
-    <link rel="stylesheet" href="./css/blog.css" />
-    <link rel="stylesheet" href="./css/login.css" />
-  </head>
 
-  <body>
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="css/changepw.css" />
+</head>
+
+<body>
+
     <nav class="navbar">
-      <img src="img/logo.png" class="logo" alt="logo" />
-      <ul class="links-container">
-        <li class="link-item">
-          <a class="link-editor" id="editorBtn" href="./editor.html">editor</a>
-        </li>
-        <li class="link-item">
-          <a class="link-editor" id="logoutBtn" href="./blog.html">logout</a>
-        </li>
-        <li class="link-item"><a class="link" id="openLogin">login</a></li>
-        <li class="link-item"><a class="link" href="./index.html">home</a></li>
-      </ul>
+        <img src="img/logo.png" class="logo" alt="logo" />
+        <ul class="links-container">
+            <li class="link-item">
+                <a id="homeBtn" href="./index.html" class="link">home</a>
+            </li>
+            <li class="link-item">
+                <a id="editorBtn" href="./editor.html" class="link">editor</a>
+            </li>
+            <li class="link-item"><a id="logoutLink" class="link">logout</a></li>
+            <li class="link-item"><a id="openLoginLink" class="link">login</a></li>
+            <li class="link-item"><a id="openChangePw" class="link">change password</a>
+            </li>
+        </ul>
     </nav>
 
+    <header class="header">
+        <div class="content">
+            <h1 class="heading">
+                <span class="small">welcome</span>
+            </h1>
+        </div>
+    </header>
+
+
+    <div id="blog-section"></div>
+
+    <div id="modal" class="modal"></div>
+
     <div class="container-login" id="login">
-      <div class="login">
-        <div id="closeLogin" class="button-close">
-          <button id="hidePopUp">X</button>
-        </div>
+        <div class="login">
+            <div id="closeLogin" class="button-close">
+                <button id="hidePopUp">X</button>
+            </div>
 
-        <div class="h4-email">
-          <h4>E-Mail</h4>
-        </div>
+            <div class="userName-container">
+                <div class="h4-userName">
+                    <h4>User</h4>
+                </div>
 
-        <div class="email">
-          <input type="email" id="email" />
-        </div>
+                <div>
+                    <input type="text" id="userName" />
+                </div>
+            </div>
 
-        <div class="h4-password">
-          <h4>Password</h4>
-        </div>
+            <div class="password-container">
+                <div class="h4-password">
+                    <h4>Password</h4>
+                </div>
 
-        <div class="password">
-          <input type="password" id="password" />
-        </div>
+                <div class="password">
+                    <input type="password" id="password" />
+                </div>
+            </div>
 
-        <div class="button-login" id="btn-login">
-          <button id="loginBtn">Login</button>
-        </div>              
-      </div>
+            <div class="button-container">
+                <div class="button-login" id="btn-login">
+                    <button id="loginBtn"><h4>Login</h4></button>
+                </div>
+            </div>
+
+            <div class="logoLogin">
+                <img class="logo" src="./img/logo.png" />
+            </div>
+
+        </div>
     </div>
 
-    <div class="banner">
-      <div class="blog">
-        <h1 class="title"></h1>
-        <p class="published"><span>published at -</span></p>
-        <div class="article"></div>
-      </div>
+    <div class="container-changePw" id="changePw">
+        <div class="changePassword">
+
+            <div id="closeChangePw" class="button-close">
+                <button id="hidePopUpPw">X</button>
+            </div>
+
+            <div class="containerPw1">
+
+                <div class="h4-pw">
+                    <h4>Password 1</h4>
+                </div>
+
+                <div>
+                    <input type="password" id="pw1" />
+                </div>
+
+            </div>
+
+            <div class="containerPw2">
+
+                <div class="h4-pw">
+                    <h4>Password 2</h4>
+                </div>
+
+                <div class="password">
+                    <input type="password" id="pw2" />
+                </div>
+
+            </div>
+
+            <div class="button-container">
+                <div class="button-save" id="btn-save">
+                    <button id="changePwBtn"><h4>Save</h4></button>
+                </div>
+            </div>
+
+
+        </div>
+
+
     </div>
-
-    <h1 class="sub-heading">Read more</h1>
-
-    <section class="blogs-section">
-      <div class="blog-card">
-        <img src="img/header.jpg" alt="header" class="blog-image" />
-        <h1 class="blog-title">Neue Food möglichkeiten.</h1>
-        <p class="blog-overview">sehe neue Food trends</p>
-        <a href="/" class="btn dark">read</a>
-      </div>
-    </section>
 
     <script type="module" src="./js/firebase.js"></script>
+    <script type="module" src="./js/home.js"></script>
     <script type="module" src="./js/login.js"></script>
 
-    <script src="./js/home.js"></script>
-    <script src="./js/blog.js"></script>
-  </body>
+</body>
+
 </html>
