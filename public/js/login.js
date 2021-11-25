@@ -136,14 +136,14 @@ function signIn() {
                 username = snapshot.val().toString().toLowerCase();
             });
 
+            //chech user
             if (username == user) {
                 //Get Email
                 onValue(emailAdminRef, (snapshot) => {
                     emailAdmin = snapshot.val().toString();
                 });
 
-                console.log(emailAdmin);
-
+                //Sign in with email and password -> firebase
                 signInWithEmailAndPassword(auth, emailAdmin, password)
                     .then(() => {
 
@@ -159,17 +159,21 @@ function signIn() {
                         //Show btn logout
                         document.getElementById("logoutLink").classList.remove("in-active");
                     })
+                    //cath error
                     .catch((error) => {
+
                         const errorCode = error.code;
                         const errorMessage = error.message;
 
-                        if (errorCode == "auth/wrong-password") {
-                            pwInput.value = "";
-                            alert("wrong user or password")
-                        };
+                        document.getElementById("infoLogin").classList.remove("infoUserandPw");
+
+                        document.getElementById("infoLogin").classList.add("active");
+                        pwInput.value = "";
                     });
             } else {
-                alert("wrong user or password")
+                document.getElementById("infoLogin").classList.remove("infoUserandPw");
+                document.getElementById("infoLogin").classList.add("active");
+                pwInput.value = "";
             }
         });
     })
