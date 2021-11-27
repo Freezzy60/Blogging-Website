@@ -1,11 +1,9 @@
-
 import { getDatabase, ref, set, onValue, child, push, update, remove } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-storage.js";
 
 const db = getDatabase();
 
 //----References-----------------//
-var imgName, imgUrl;
 var files = [];
 var reader = new FileReader();
 
@@ -40,10 +38,10 @@ function insertData(URL) {
         ImageName: (name + ext),
         ImgUrl: URL,
         //Alert push done
-    }).then(function () {
+    }).then(function() {
         alert("push done")
-        //Catch error
-    }).catch(function (errror) {
+            //Catch error
+    }).catch(function(errror) {
         var error_code = error.code;
         var error_message = error.message;
         //Alert errror
@@ -71,14 +69,14 @@ input.onchange = e => {
 
 }
 
-reader.onload = function () {
+reader.onload = function() {
     bannerImage.src = reader.result;
 }
 
 //Selection
 
 
-selBtn.onclick = function () {
+selBtn.onclick = function() {
     input.click();
 }
 
@@ -111,9 +109,9 @@ async function uploadProcess() {
     const uploadTask = uploadBytesResumable(storageRef, imgToUpload, metaData);
 
     uploadTask.on('state-change', (snapshot) => {
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        proglab.innerHTML = "Upload " + progress + "%";
-    },
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            proglab.innerHTML = "Upload " + progress + "%";
+        },
         (error) => {
             alert("error: image not uploaded!");
         },
@@ -128,57 +126,3 @@ async function uploadProcess() {
 }
 
 instBtn.onclick = uploadProcess;
-
-
-
-
-
-
-/*
-//banner
-const banner = document.querySelector(".banner");
-let bannerPath;
-
-const publishBtn = document.querySelector('.publish-btn');
-const uploadInput = document.querySelector('#image-upload');
-
-
-var upload_image = "";
-*/
-/**bannerImage.addEventListener("change", function(){
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-        upload_image = reader.result;
-        document.querySelector(".banner").style.backgroundImage = `url(${upload_image})`;
-    });
-    reader.readAsDataURL(this.files[0]);
-
-})**/
-
-
-/**uploadInput.addEventListener('change', () => {
-    uploadImage(uploadInput, "image");
-})**/
-
-/**const uploadImage = (uploadFile, uploadType) => {
-    const[file] = uploadFile.files;
-    if(file && file.type.includes("image")){
-        const formdata = new Formdata();
-        formdata.append('image', file);
-
-        fetch('/upload', {
-            method: 'post',
-            body: formdata
-        }).then(res => res.json())
-        .then(data => {
-            if(uploadType == "image"){
-                addImage(data, file.name);
-            } else{
-                bannerPath = `${location.origin}/${data}`;
-                banner.style.backgroundImage = `url("${bannerPath}")`;
-            }
-        })
-    }else{
-        alert("upload Image only")
-    }
-}**/

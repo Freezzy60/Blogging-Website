@@ -1,4 +1,9 @@
 import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+import { getStorage, deleteObject, ref as sref } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-storage.js";
+
+//-- Get Storage --//
+const storage = getStorage();
+
 
 //-- Get Database --//
 const db = getDatabase();
@@ -80,6 +85,12 @@ onValue(query, (snapshot) => {
 
         //Remove blog
         function removeBlog() {
+
+            //Storage Ref TEST VERSION
+            const storageRef = sref(storage, 'Images/');
+            deleteObject(storageRef);
+            console.log(dataImage);
+
 
             document.getElementById("blog" + this.id).remove();
             //Get Ref to blog at db

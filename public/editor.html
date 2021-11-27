@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,27 +9,23 @@
     <link rel="stylesheet" href="./css/home.css">
     <link rel="stylesheet" href="./css/editor.css">
 </head>
+
 <body>
 
     <nav class="navbar">
         <img src="img/logo.png" class="logo" alt="logo">
         <ul class="links-container">
             <li class="link-item"><a href="./index.html" class="link">home</a></li>
-            <li class="link-item"><a href="./home.html" class="link">blog</a></li>
+            <li class="link-item"><a href="./blog.html" class="link">blog</a></li>
         </ul>
     </nav>
 
     <div>
-        <!--<input type="file" accept="image/*" id="banner-upload"/>
-        <img for="banner-upload" class="banner-upload-btn" id="imgUpBtn"><img src="./img/uplodIcon.png" alt="upload banner"></img><br><br>
-        <label> Image Name</label> <input type="text" id="namebox"> <label id="extlab"></label><br><br>
-        <label id="upprogress"></label>-->
         <img id="banner-upload" class="banner"> <label id="upprogress"></label> <br><br>
-        <label>Image Name</label><input type="text" id="namebox"><label id="extlab"></label><br><br>
-        <button id="selbtn">Select Image</button>
     </div>
 
     <div class="blog">
+        <textarea type="text" class="image-name" placeholder="Image Name..." id="namebox"></textarea><label hidden id="extlab"></label>
         <textarea type="text" class="title" placeholder="Blog title..."></textarea>
         <textarea type="text" class="article" placeholder="Start writing here"></textarea>
     </div>
@@ -36,10 +33,11 @@
     <div class="blog-options">
         <button class="btn dark publish-btn" id="publishBtn">publish</button>
         <input type="file" accept="image/*" id="image-upload" hidden>
-        <!--<label for="image-upload" class="btn grey upload-btn" id="upBtn">Upload Image</label>-->
+        <button id="selbtn" class="btn grey">Select Image</button>
     </div>
-    
+
     <script type="module" src="./js/firebase.js"></script>
     <script type="module" src="./js/editor.js"></script>
 </body>
+
 </html>
