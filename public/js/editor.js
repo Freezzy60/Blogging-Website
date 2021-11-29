@@ -39,8 +39,10 @@ function insertData(URL) {
         ImgUrl: URL,
         //Alert push done
     }).then(function() {
-        alert("push done")
-            //Catch error
+        alert("push done");
+        //reload page when push done
+        location.reload();
+        //Catch error
     }).catch(function(errror) {
         var error_code = error.code;
         var error_message = error.message;
@@ -48,8 +50,6 @@ function insertData(URL) {
         alert(error_message);
     });
 };
-
-//instBtn.addEventListener('click', insertData);
 
 //---Insert Image into Storage---//
 
@@ -80,11 +80,13 @@ selBtn.onclick = function() {
     input.click();
 }
 
+//Get the extention (png, jpg ....) from the File
 function GetFileExt(file) {
     var temp = file.name.split('.');
     var ext = temp.slice((temp.length - 1), (temp.length));
     return '.' + ext[0];
 }
+
 
 function GetFileName(file) {
     var temp = file.name.split('.');
@@ -92,12 +94,13 @@ function GetFileName(file) {
     return fname;
 }
 
-//upload Proces
+//--- Upload Proces ---//
 
 async function uploadProcess() {
     var imgToUpload = files[0];
 
     var imgName = namebox.value + extlab.innerHTML;
+
     const metaData = {
         contentType: imgToUpload.type
     }

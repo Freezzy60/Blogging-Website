@@ -87,7 +87,7 @@ onValue(query, (snapshot) => {
         function removeBlog() {
 
             //Storage Ref TEST VERSION
-            const storageRef = sref(storage, 'Images/');
+            const storageRef = sref(storage, 'Images/Dornbirn.jpg');
             deleteObject(storageRef);
             console.log(dataImage);
 

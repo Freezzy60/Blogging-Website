@@ -17,12 +17,12 @@
     padding: 50px 0;
 }
 
-textarea::webkoit-scrollbar {
+.article::webkoit-scrollbar {
     width: 10px;
 }
 
-textarea::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.1);
+.article::-webkit-scrollbar-thumb {
+    background: rgb(128, 3, 3);
     border-radius: 10px;
 }
 
@@ -48,12 +48,12 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .article {
-    height: 500px;
+    height: 400px;
     font-size: 20px;
     margin-top: 20px;
     line-height: 30px;
     font-weight: 500;
-    padding-bottom: 100px;
+    padding-bottom: 50px;
     white-space: pre-wrap;
 }
 
@@ -63,7 +63,7 @@ textarea::-webkit-scrollbar-thumb {
     left: 0;
     width: 100%;
     height: 60px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.664);
     z-index: 9;
     display: flex;
     justify-content: center;
