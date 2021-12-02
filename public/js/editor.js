@@ -66,7 +66,6 @@ input.onchange = e => {
     extlab.innerHTML = extention;
 
     reader.readAsDataURL(files[0]);
-
 }
 
 reader.onload = function() {
@@ -111,20 +110,25 @@ async function uploadProcess() {
 
     const uploadTask = uploadBytesResumable(storageRef, imgToUpload, metaData);
 
-    uploadTask.on('state-change', (snapshot) => {
-            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            proglab.innerHTML = "Upload " + progress + "%";
-        },
-        (error) => {
-            alert("error: image not uploaded!");
-        },
-        () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                console.log(downloadURL);
-                insertData(downloadURL);
-            });
-        }
-    );
+    if (imgToUpload.size > 5000 * 1024) {
+        alert('Image size to big');
+    } else {
+        uploadTask.on('state-change', (snapshot) => {
+                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                proglab.innerHTML = "Upload " + progress + "%";
+            },
+            (error) => {
+                alert("error: image not uploaded!");
+            },
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    console.log(downloadURL);
+                    insertData(downloadURL);
+                });
+            }
+        );
+    }
+
 
 }
 
