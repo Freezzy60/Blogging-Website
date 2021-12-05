@@ -14,6 +14,8 @@ var dataTitle = "";
 var dataText = "";
 //Url of Image
 var dataImage = "";
+//Name of Image
+var dataImageName = "";
 
 //Get blogs from db
 var query = ref(db, "Blog");
@@ -48,6 +50,13 @@ onValue(query, (snapshot) => {
         onValue(blogEntryRefText, (snapshot) => {
             dataText = snapshot.val().toString();
         });
+        //Get Ref to Image Name at db
+        const blogImageName = ref(db, 'Blog/' + blogKey + '/ImageName');
+
+        //Get ImgName from db
+        onValue(blogImageName, (snapshot) => {
+            dataImageName = snapshot.val().toString();
+        });
 
         //Get Ref to Image at db
         const blogImageBanner = ref(db, 'Blog/' + blogKey + '/ImgUrl');
@@ -68,7 +77,7 @@ onValue(query, (snapshot) => {
         //add classname div
         newBlog.className = "blog-card";
         //innerHTML Div
-        newBlog.innerHTML = '<img src=' + dataImage + ' alt="header" class="blog-image">' +
+        newBlog.innerHTML = '<img src=' + dataImage + ' name= ' + dataImageName + '  id="blog-image" alt="header" class="blog-image">' +
             '<h1 id=blog-title>' + dataTitle + '</h1>' +
             '<p id="blog-overview">' + dataText.slice(0, 100) + '</p>' +
             '<input type="button" id=' + modalCounterId + ' class="btn dark" value="Read" />' +
@@ -83,13 +92,20 @@ onValue(query, (snapshot) => {
         deleteBlog.addEventListener('click', removeBlog);
 
 
+        //const blogImageURL = document.getElementById('blog-image').src;
+        //console.log(blogImageURL);
+
+        const blogImageNam = document.getElementById('blog-image').name;
+        console.log(blogImageNam);
+
+
+
         //Remove blog
         function removeBlog() {
 
             //Storage Ref TEST VERSION
-            const storageRef = sref(storage, 'Images/Dornbirn.jpg');
+            const storageRef = sref(storage, 'Images/' + blogImageNam);
             deleteObject(storageRef);
-            console.log(dataImage);
 
 
             document.getElementById("blog" + this.id).remove();
