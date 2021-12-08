@@ -262,13 +262,3 @@ function validate_password(password) {
         return true;
     }
 };
-
-
-
-
-//Life Motto
-
-if (sad() === true){
-    sad().stop();
-    beAwesome();
-}
