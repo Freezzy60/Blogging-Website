@@ -1,11 +1,9 @@
-
 import { getDatabase, ref, set, onValue, child, push, update, remove } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
 import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-storage.js";
 
 const db = getDatabase();
 
 //----References-----------------//
-var imgName, imgUrl;
 var files = [];
 var reader = new FileReader();
 
@@ -40,18 +38,18 @@ function insertData(URL) {
         ImageName: (name + ext),
         ImgUrl: URL,
         //Alert push done
-    }).then(function () {
-        alert("push done")
+    }).then(function() {
+        alert("push done");
+        //reload page when push done
+        location.reload();
         //Catch error
-    }).catch(function (errror) {
+    }).catch(function(errror) {
         var error_code = error.code;
         var error_message = error.message;
         //Alert errror
         alert(error_message);
     });
 };
-
-//instBtn.addEventListener('click', insertData);
 
 //---Insert Image into Storage---//
 
@@ -68,25 +66,26 @@ input.onchange = e => {
     extlab.innerHTML = extention;
 
     reader.readAsDataURL(files[0]);
-
 }
 
-reader.onload = function () {
+reader.onload = function() {
     bannerImage.src = reader.result;
 }
 
 //Selection
 
 
-selBtn.onclick = function () {
+selBtn.onclick = function() {
     input.click();
 }
 
+//Get the extention (png, jpg ....) from the File
 function GetFileExt(file) {
     var temp = file.name.split('.');
     var ext = temp.slice((temp.length - 1), (temp.length));
     return '.' + ext[0];
 }
+
 
 function GetFileName(file) {
     var temp = file.name.split('.');
@@ -94,12 +93,13 @@ function GetFileName(file) {
     return fname;
 }
 
-//upload Proces
+//--- Upload Proces ---//
 
 async function uploadProcess() {
     var imgToUpload = files[0];
 
     var imgName = namebox.value + extlab.innerHTML;
+
     const metaData = {
         contentType: imgToUpload.type
     }
@@ -110,75 +110,26 @@ async function uploadProcess() {
 
     const uploadTask = uploadBytesResumable(storageRef, imgToUpload, metaData);
 
-    uploadTask.on('state-change', (snapshot) => {
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        proglab.innerHTML = "Upload " + progress + "%";
-    },
-        (error) => {
-            alert("error: image not uploaded!");
-        },
-        () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                console.log(downloadURL);
-                insertData(downloadURL);
-            });
-        }
-    );
+    if (imgToUpload.size > 5000 * 1024) {
+        alert('Image size to big');
+    } else {
+        uploadTask.on('state-change', (snapshot) => {
+                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                proglab.innerHTML = "Upload " + progress + "%";
+            },
+            (error) => {
+                alert("error: image not uploaded!");
+            },
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    console.log(downloadURL);
+                    insertData(downloadURL);
+                });
+            }
+        );
+    }
+
 
 }
 
 instBtn.onclick = uploadProcess;
-
-
-
-
-
-
-/*
-//banner
-const banner = document.querySelector(".banner");
-let bannerPath;
-
-const publishBtn = document.querySelector('.publish-btn');
-const uploadInput = document.querySelector('#image-upload');
-
-
-var upload_image = "";
-*/
-/**bannerImage.addEventListener("change", function(){
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-        upload_image = reader.result;
-        document.querySelector(".banner").style.backgroundImage = `url(${upload_image})`;
-    });
-    reader.readAsDataURL(this.files[0]);
-
-})**/
-
-
-/**uploadInput.addEventListener('change', () => {
-    uploadImage(uploadInput, "image");
-})**/
-
-/**const uploadImage = (uploadFile, uploadType) => {
-    const[file] = uploadFile.files;
-    if(file && file.type.includes("image")){
-        const formdata = new Formdata();
-        formdata.append('image', file);
-
-        fetch('/upload', {
-            method: 'post',
-            body: formdata
-        }).then(res => res.json())
-        .then(data => {
-            if(uploadType == "image"){
-                addImage(data, file.name);
-            } else{
-                bannerPath = `${location.origin}/${data}`;
-                banner.style.backgroundImage = `url("${bannerPath}")`;
-            }
-        })
-    }else{
-        alert("upload Image only")
-    }
-}**/

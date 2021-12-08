@@ -1,69 +1,156 @@
-/*
-let blogId = decodeURI(location.panthname.split("/").pop());
+import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js";
+import { getStorage, deleteObject, ref as sref } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-storage.js";
 
-let docRef = db.collection("Blogs").doc(blogId);
+//-- Get Storage --//
+const storage = getStorage();
 
-docRef.get().then((doc) => {
-    if (doc.exists) {
-        setupBlog(doc.data());
-    } else {
-        location.replace("/");
-    }
-})
 
-const setupBlog = (data) => {
-    const banner = document.querySelector('.banner');
-    const blogTitle = document.querySelector('.title');
-    const titleTag = document.querySelector('title');
-    const publish = document.querySelector('.published');
+//-- Get Database --//
+const db = getDatabase();
 
-    banner.style.backgroundimage = `url(${data.bannerImage})`;
+//Title of Blog
+var dataTitle = "";
+//Text of Title
+var dataText = "";
+//Url of Image
+var dataImage = "";
+//Name of Image
+var dataImageName = "";
 
-    titleTag.innerHTML += blogTitle.innerHTML = data.title;
-    publish.innerHTML += data.publishedAt;
+//Get blogs from db
+var query = ref(db, "Blog");
+//Counter Id of div (modal)
+let modalCounterId = 100;
+//Counter Id of div(overlay)
+let overlayId = 1000;
+//Counter Id of Close
+let closeId = 10000;
 
-    const article = document.querySelector('.article');
-    addArticle(article, data.article);
-}
+//Counter Id of div (blog)
+let counterId = 0;
 
-const addArticle = (ele, data) => {
-    data = data.split("\n").filter(item => item.length);
+//Print all Blogs on website
+onValue(query, (snapshot) => {
+    snapshot.forEach(function(childSnapshot) {
+        //Get blog key
+        const blogKey = childSnapshot.key;
 
-    data.forEach(item => {
-        //check for heading
-        if (item[0] == '#') {
-            let hCount = 0;
-            let i = 0;
-            while (item[i] == '#') {
-                hCount++;
-                i++;
-            }
-            let tag = `h${hCount}`;
-            ele.innerHTML += `<${tag}>${item.slice(hCount, item.length)}</${tag}>`
+        //Get Ref to Title at db
+        const blogEntryRefTitle = ref(db, 'Blog/' + blogKey + '/Title');
+
+        //Get Title from db
+        onValue(blogEntryRefTitle, (snapshot) => {
+            dataTitle = snapshot.val().toString();
+        });
+
+        //Get Ref to Text at db
+        const blogEntryRefText = ref(db, 'Blog/' + blogKey + '/Text');
+
+        //Get Text from db
+        onValue(blogEntryRefText, (snapshot) => {
+            dataText = snapshot.val().toString();
+        });
+        //Get Ref to Image Name at db
+        const blogImageName = ref(db, 'Blog/' + blogKey + '/ImageName');
+
+        //Get ImgName from db
+        onValue(blogImageName, (snapshot) => {
+            dataImageName = snapshot.val().toString();
+        });
+
+        //Get Ref to Image at db
+        const blogImageBanner = ref(db, 'Blog/' + blogKey + '/ImgUrl');
+
+        //Get Img from db
+        onValue(blogImageBanner, (snapshot) => {
+            dataImage = snapshot.val();
+        });
+
+        //modalCounterID++
+        modalCounterId++;
+        //counterId++
+        counterId++;
+        //Create new div
+        let newBlog = document.createElement('div');
+        //set id div
+        newBlog.id = "blog" + counterId;
+        //add classname div
+        newBlog.className = "blog-card";
+        //innerHTML Div
+        newBlog.innerHTML = '<img src=' + dataImage + ' name= ' + dataImageName + '  id="blog-image" alt="header" class="blog-image">' +
+            '<h1 id=blog-title>' + dataTitle + '</h1>' +
+            '<p id="blog-overview">' + dataText.slice(0, 100) + '</p>' +
+            '<input type="button" id=' + modalCounterId + ' class="btn dark" value="Read" />' +
+            '<input type="button" id=' + counterId + ' value="Delete" class = "btn dark"/>'
+            //append newBlog -> blog-selection
+        document.getElementById("blog-section").appendChild(newBlog);
+        //Delete Button Reference
+        const deleteBlog = document.getElementById(counterId);
+
+
+        //Onclick delete Blog
+        deleteBlog.addEventListener('click', removeBlog);
+
+
+        //const blogImageURL = document.getElementById('blog-image').src;
+        //console.log(blogImageURL);
+
+        const blogImageNam = document.getElementById('blog-image').name;
+        console.log(blogImageNam);
+
+
+
+        //Remove blog
+        function removeBlog() {
+
+            //Storage Ref TEST VERSION
+            const storageRef = sref(storage, 'Images/' + blogImageNam);
+            deleteObject(storageRef);
+
+
+            document.getElementById("blog" + this.id).remove();
+            //Get Ref to blog at db
+            const currentBlog = ref(db, 'Blog/' + blogKey);
+            //Remove blog
+            remove(currentBlog);
+            //refresh page
+            location.reload();
         }
-        // cheking for image format
-        else if (item[0] == "!" && item[1] == "[") {
 
-            let seperator;
 
-            for (let i = 0; i <= item.length; i++) {
-                if (item[i] == "]" && item[i + 1] == "(" && item[item.length - 1] == ")") {
-                    seperator = i;
-                }
-            }
-            let alt = item.slice(2, seperator);
-            let src = item.slice(seperator + 2, item.length - 1);
-            ele.innerHTML += `
-            <img src="${src}" alt="${alt}" class="article-image">
-            `;
+        //CloseId++
+        closeId++;
+        //Overlayid++
+        overlayId++;
+        //Create new div
+        let modalBlog = document.createElement('div');
+        //set id div
+        modalBlog.id = overlayId;
+        //set class to div
+        modalBlog.className = "overlay";
+        //inner HTML div
+        modalBlog.innerHTML =
+            '<span id=' + closeId + ' class="close">X</span>' +
+            '<img src=' + dataImage + ' alt="header" class="blog-image">' +
+            '<h1> ' + dataTitle + ' </h1>' +
+            '<p> ' + dataText + ' </p>'
+
+
+        document.getElementById('modal').appendChild(modalBlog);
+
+        const span = document.getElementById(closeId);
+        const modal = document.getElementById(overlayId);
+        //const overlay = document.getElementById('overlay' + this.id);
+
+        //Read Button Reference
+        const readBtn = document.getElementById(modalCounterId);
+        //onClick read Blog
+        readBtn.onclick = () => {
+            modal.style.display = "block";
         }
-        else {
-            ele.innerHTML += `<p>${item}</p>`
+
+        span.onclick = () => {
+            modal.style.display = "none";
         }
-
-    });
-}
-*/
-  
-
-
+    })
+});
